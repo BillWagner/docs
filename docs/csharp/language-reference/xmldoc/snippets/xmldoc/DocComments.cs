@@ -1,12 +1,48 @@
 ﻿//-----------------------------------------------------------------------------
-namespace Wrap1
+namespace XmlTags
 {
-    //<Snippet1>
-    // compile with: -doc:DocFileName.xml
-
-    /// text for class TestClass
+    //<SummaryTag>
     public class TestClass
     {
+        /// <summary>DoWork is a method in the TestClass class.
+        /// <para>
+        ///  Here's how you could make a second paragraph in a description. 
+        /// <see cref="System.Console.WriteLine(System.String)"/> for information about output statements.
+        /// </para>
+        /// <seealso cref="TestClass.Main"/>
+        /// </summary>
+        public static void DoWork(int Int1)
+        {
+        }
+    }
+    //</SummaryTag>
+
+    //<RemarksTag>
+    /// <summary>
+    /// You may have some primary information about this class.
+    /// </summary>
+    /// <remarks>
+    /// You may have some additional information about this class.
+    /// </remarks>
+    public class AnotherClass
+    {
+    }
+    //</RemarksTag>
+
+    public class TagsAndTags
+    {
+        //<ReturnsTag>
+        /// <returns>Returns zero.</returns>
+        public static int GetZero()
+        {
+            return 0;
+        }
+       //</ReturnsTag>
+    }
+
+    public class ParamsAndParamRefs
+    {
+        //<ParamTag>
         // Single parameter.
         /// <param name="Int1">Used to indicate status.</param>
         public static void DoWork(int Int1)
@@ -19,20 +55,87 @@ namespace Wrap1
         public static void DoWork(int Int1, float Float1)
         {
         }
+        //</ParamTag>
 
-        /// text for Main
-        static void Main()
+        //<ParamRefTag>
+        /// <summary>DoWork is a method in the TestClass class.
+        /// The <paramref name="int1"/> parameter takes a number.
+        /// </summary>
+        public static void DoWork(int int1)
         {
         }
+        //</ParamRefTag>
+
+        //<ExceptionTag>
+        /// <exception cref="System.Exception">Thrown when...</exception>
+        public void DoSomething()
+        {
+            try
+            {
+            }
+            catch (InvalidOperationException)
+            {
+            }
+        }
+        //</ExceptionTag>
+
+        //<TypeParamTags>
+        /// <summary>
+        /// Creates a new array of arbitrary type <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">The element type of the array</typeparam>
+        public static T[] mkArray<T>(int n)
+        {
+            return new T[n];
+        }
+        //</TypeParamTags>
+
+        //<IncludeTag>
+        /// <include file='xml_include_tag.xml' path='MyDocs/MyMembers[@name="test"]/*' />
+        class Test
+        {
+            static void Main()
+            {
+            }
+        }
+
+        /// <include file='xml_include_tag.xml' path='MyDocs/MyMembers[@name="test2"]/*' />
+        class Test2
+        {
+            public void Test()
+            {
+            }
+        }
+        //</IncludeTag>
     }
-    //</Snippet1>
+
+    //<ValueTag>
+    public class Employee
+    {
+        private string _name;
+
+        /// <summary>The Name property represents the employee's name.</summary>
+        /// <value>The Name property gets/sets the value of the string field, _name.</value>
+
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+            }
+        }
+    }
+    //</ValueTag>
 }
 
 //-----------------------------------------------------------------------------
 namespace Wrap2
 {
     //<Snippet2>
-    // compile with: -doc:DocFileName.xml
 
     /// text for class TestClass
     public class TestClass
@@ -52,10 +155,7 @@ namespace Wrap2
 }
 
 //-----------------------------------------------------------------------------
-//<Snippet3>
-// Save this file as CRefTest.cs
-// Compile with: csc CRefTest.cs -doc:Results.xml
-
+//<CRefTags>
 namespace TestNamespace
 {
     /// <summary>
@@ -127,101 +227,12 @@ namespace TestNamespace
         }
     }
 }
-//</Snippet3>
-
-namespace Wrap3
-{
-    // compile with: -doc:DocFileName.xml
-
-    /// text for class TestClass
-    public class TestClass
-    {
-        /// <summary>
-        /// The GetZero method.
-        /// </summary>
-        /// <example> This sample shows how to call the <see cref="TestClass.GetZero"/> method.
-        /// <code>
-        /// class TestClass
-        /// {
-        ///     static int Main()
-        ///     {
-        ///         return GetZero();
-        ///     }
-        /// }
-        /// </code>
-        /// </example>
-        public static int GetZero()
-        {
-            return 0;
-        }
-
-        /// text for Main
-        static void Main()
-        {
-        }
-    }
-}
-
-//-----------------------------------------------------------------------------
-namespace Wrap4
-{
-    //<Snippet4>
-    // compile with: -doc:DocFileName.xml
-
-    /// Comment for class
-    public class EClass : System.Exception
-    {
-        // class definition...
-    }
-
-    /// Comment for class
-    class TestClass
-    {
-        /// <exception cref="System.Exception">Thrown when...</exception>
-        public void DoSomething()
-        {
-            try
-            {
-            }
-            catch (EClass)
-            {
-            }
-        }
-    }
-    //</Snippet4>
-}
-
-//-----------------------------------------------------------------------------
-namespace Wrap5
-{
-    //<Snippet5>
-    // compile with: -doc:DocFileName.xml
-
-    /// <include file='xml_include_tag.doc' path='MyDocs/MyMembers[@name="test"]/*' />
-    class Test
-    {
-        static void Main()
-        {
-        }
-    }
-
-    /// <include file='xml_include_tag.doc' path='MyDocs/MyMembers[@name="test2"]/*' />
-    class Test2
-    {
-        public void Test()
-        {
-        }
-    }
-    //</Snippet5>
-    // Following line is a trick to try to fix a problem in the msdn build.
-    /**/
-}
+//</CRefTags>
 
 //-----------------------------------------------------------------------------
 namespace Wrap6
 {
     //<Snippet6>
-    // compile with: -doc:DocFileName.xml
 
     /// text for class TestClass
     public class TestClass
@@ -244,34 +255,11 @@ namespace Wrap6
 }
 
 //-----------------------------------------------------------------------------
-namespace Wrap7
-{
-    //<Snippet7>
-    // compile with: -doc:DocFileName.xml
-
-    /// text for class TestClass
-    public class TestClass
-    {
-        /// <summary>DoWork is a method in the TestClass class.
-        /// The <paramref name="int1"/> parameter takes a number.
-        /// </summary>
-        public static void DoWork(int int1)
-        {
-        }
-
-        /// text for Main
-        static void Main()
-        {
-        }
-    }
-    //</Snippet7>
-}
 
 //-----------------------------------------------------------------------------
 namespace Wrap8
 {
     //<Snippet8>
-    // compile with: -doc:DocFileName.xml
 
     class TestClass
     {
@@ -287,173 +275,11 @@ namespace Wrap8
     //</Snippet8>
 }
 
-//-----------------------------------------------------------------------------
-namespace Wrap9
-{
-    //<Snippet9>
-    // compile with: -doc:DocFileName.xml
-
-    /// <summary>
-    /// You may have some primary information about this class.
-    /// </summary>
-    /// <remarks>
-    /// You may have some additional information about this class.
-    /// </remarks>
-    public class TestClass
-    {
-        /// text for Main
-        static void Main()
-        {
-        }
-    }
-    //</Snippet9>
-}
-
-//-----------------------------------------------------------------------------
-namespace Wrap10
-{
-    //<Snippet10>
-    // compile with: -doc:DocFileName.xml
-
-    /// text for class TestClass
-    public class TestClass
-    {
-        /// <returns>Returns zero.</returns>
-        public static int GetZero()
-        {
-            return 0;
-        }
-
-        /// text for Main
-        static void Main()
-        {
-        }
-    }
-    //</Snippet10>
-}
-
-//-----------------------------------------------------------------------------
-namespace Wrap11
-{
-    //<Snippet11>
-    // compile with: -doc:DocFileName.xml
-
-    // the following cref shows how to specify the reference, such that,
-    // the compiler will resolve the reference
-    /// <summary cref="C{T}">
-    /// </summary>
-    class A { }
-
-    // the following cref shows another way to specify the reference,
-    // such that, the compiler will resolve the reference
-    // <summary cref="C &lt; T &gt;">
-
-    // the following cref shows how to hard-code the reference
-    /// <summary cref="T:C`1">
-    /// </summary>
-    class B { }
-
-    /// <summary cref="A">
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    class C<T> { }
-
-    class Program
-    {
-        static void Main() { }
-    }
-    //</Snippet11>
-}
-
-//-----------------------------------------------------------------------------
-namespace Wrap12
-{
-    //<Snippet12>
-    // compile with: -doc:DocFileName.xml
-
-    /// text for class TestClass
-    public class TestClass
-    {
-        /// <summary>DoWork is a method in the TestClass class.
-        /// <para>Here's how you could make a second paragraph in a description. <see cref="System.Console.WriteLine(System.String)"/> for information about output statements.</para>
-        /// <seealso cref="TestClass.Main"/>
-        /// </summary>
-        public static void DoWork(int Int1)
-        {
-        }
-
-        /// text for Main
-        static void Main()
-        {
-        }
-    }
-    //</Snippet12>
-}
-
-//-----------------------------------------------------------------------------
-namespace Wrap13
-{
-    //<Snippet13>
-    // compile with: -doc:DocFileName.xml
-
-    /// comment for class
-    public class TestClass
-    {
-        /// <summary>
-        /// Creates a new array of arbitrary type <typeparamref name="T"/>
-        /// </summary>
-        /// <typeparam name="T">The element type of the array</typeparam>
-        public static T[] mkArray<T>(int n)
-        {
-            return new T[n];
-        }
-    }
-    //</Snippet13>
-}
-
-//-----------------------------------------------------------------------------
-namespace Wrap14
-{
-    //<Snippet14>
-    // compile with: -doc:DocFileName.xml
-
-    /// text for class Employee
-    public class Employee
-    {
-        private string _name;
-
-        /// <summary>The Name property represents the employee's name.</summary>
-        /// <value>The Name property gets/sets the value of the string field, _name.</value>
-
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        }
-    }
-
-    /// text for class MainClass
-    public class MainClass
-    {
-        /// text for Main
-        static void Main()
-        {
-        }
-    }
-    //</Snippet14>
-}
 
 //-----------------------------------------------------------------------------
 namespace Wrap15
 {
     //<Snippet15>
-    // If compiling from the command line, compile with: -doc:YourFileName.xml
 
     /// <summary>
     /// Class level summary documentation goes here.
@@ -560,11 +386,9 @@ namespace Wrap15
 }
 
 //-----------------------------------------------------------------------------
-namespace Wrap16
+namespace InheritDoc
 {
-    //<Snippet16>
-    // compile with: -doc:DocFileName.xml
-
+    //<InheritDocTag>
     /// <summary>
     /// You may have some primary information about this class.
     /// </summary>
@@ -573,17 +397,9 @@ namespace Wrap16
     }
 
     ///<inheritdoc/>
-    public class TestClass: MainClass
+    public class DerivedClass: MainClass
     {
     }
-    //</Snippet16>
-}
-
-//-----------------------------------------------------------------------------
-namespace Wrap17
-{
-    //<Snippet17>
-    // compile with: -doc:DocFileName.xml
 
     /// <summary>
     /// You may have some primary information about this interface.
@@ -593,18 +409,10 @@ namespace Wrap17
     }
 
     ///<inheritdoc cref="ITestInterface"/>
-    public class TestClass : ITestInterface
+    public class ImplementingClass : ITestInterface
     {
     }
-    //</Snippet17>
-}
 
-//-----------------------------------------------------------------------------
-namespace Wrap18
-{
-    //<Snippet18>
-    // compile with: -doc:DocFileName.xml
-    
     public class InheritOnlyReturns
     {
         /// <summary>In this example, this summary is only visible for this method.</summary>
@@ -614,13 +422,6 @@ namespace Wrap18
         /// <inheritdoc cref="MyParentMethod" path="/returns"/>
         public static bool MyChildMethod() { return false; }
     }
-    //</Snippet18>
-}
-
-namespace Wrap19
-{
-    //<Snippet19>
-    // compile with: -doc:DocFileName.xml
     
     public class InheritAllButRemarks
     {
@@ -632,5 +433,5 @@ namespace Wrap19
         /// <inheritdoc cref="MyParentMethod" path="//*[not(self::remarks)]"/>
         public static bool MyChildMethod() { return false; }
     }
-    //</Snippet19>
+    //</InheritDocTag>
 }

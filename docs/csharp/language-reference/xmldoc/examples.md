@@ -3,7 +3,6 @@ title: "How to use the XML documentation features - C# programming guide"
 description: Learn how to use XML documentation features. See code examples and view additional available resources.
 ms.date: 06/01/2018
 ms.topic: how-to
-  - "<see>"
 ---
 # How to use the XML documentation features
 
