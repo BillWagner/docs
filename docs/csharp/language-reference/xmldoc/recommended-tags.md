@@ -1,25 +1,19 @@
 ---
-title: "Recommended tags for documentation comments - C# programming guide"
-description: Learn about the recommended tags for documentation comments. See a list of recommended tags and view additional available resources.
-ms.date: 01/21/2020
+title: "Recommended XML documentation tags for a class and its members"
+description: This example explains the recommended tags for a non-generic class or struct. You can follow these rules for most types you create.
+ms.date: 06/16/2021
 ms.topic: conceptual
 helpviewer_keywords:
   - "XML [C#], tags"
   - "XML documentation [C#], tags"
-ms.assetid: 6e98f7a9-38f4-4d74-b644-1ff1b23320fd
 ---
-# Recommended tags for documentation comments (C# programming guide)
-
-The C# compiler processes documentation comments in your code and formats them as XML in a file whose name you specify in the **/doc** command-line option. To create the final documentation based on the compiler-generated file, you can create a custom tool, or use a tool such as [DocFX](https://dotnet.github.io/docfx/) or [Sandcastle](https://github.com/EWSoftware/SHFB).
-
-Tags are processed on code constructs such as types and type members.
-
-> [!NOTE]
-> Documentation comments cannot be applied to a namespace.
+# Recommend XML tags for documenting a non-generic class and its members
 
 The compiler will process any tag that is valid XML. The following tags provide generally used functionality in user documentation.
 
 ## Tags
+
+TODO:  UPDATE WITH LINKS TO ANCHORS OR SUCH
 
 :::row:::
     :::column:::
@@ -51,6 +45,9 @@ The compiler will process any tag that is valid XML. The following tags provide 
 
 (\* denotes that the compiler verifies syntax.)
 
+> [!NOTE]
+> Documentation comments cannot be applied to a namespace.
+
 If you want angle brackets to appear in the text of a documentation comment, use the HTML encoding of `<` and `>` which is `&lt;` and `&gt;` respectively. This encoding is shown in the following example.
 
 ```csharp
@@ -58,42 +55,6 @@ If you want angle brackets to appear in the text of a documentation comment, use
 /// This property always returns a value &lt; 1.
 /// </summary>
 ```
-
-## See also
-
-- [C# programming guide](../index.md)
-- [**DocumentationFile** (C# compiler options)](../../language-reference/compiler-options/output.md#documentationfile)
-- [XML documentation comments](./index.md)
-
-# Document your C# code with XML comments
-
-XML documentation comments are a special kind of comment, added above the definition of any user-defined type or member.
-They are special because they can be processed by the compiler to generate an XML documentation file at compile time.
-The compiler-generated XML file can be distributed alongside your .NET assembly so that Visual Studio and other IDEs can use IntelliSense to show quick information about types or members. Additionally, the XML file can be run through tools like [DocFX](https://dotnet.github.io/docfx/) and [Sandcastle](https://github.com/EWSoftware/SHFB) to generate API reference websites.
-
-XML documentation comments, like all other comments, are ignored by the compiler.
-
-You can generate the XML file at compile time by doing one of the following:
-
-- If you are developing an application with .NET Core from the command line, you can add a `GenerateDocumentationFile` element to the `<PropertyGroup>` section of your .csproj project file. You can also specify the path to the documentation file directly using [`DocumentationFile` element](/visualstudio/msbuild/common-msbuild-project-properties). The following example generates an XML file in the project directory with the same root filename as the assembly:
-
-   ```xml
-   <GenerateDocumentationFile>true</GenerateDocumentationFile>
-   ```
-
-   This is equivalent to the following:
-
-   ```xml
-   <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-   ```
-
-- If you are developing an application using Visual Studio, right-click on the project and select **Properties**. In the properties dialog, select the **Build** tab, and check **XML documentation file**. You can also change the location to which the compiler writes the file.
-
-- If you are compiling a .NET application from the command line, add the [**DocumentationFile** compiler option](language-reference/compiler-options/output.md#documentationfile) when compiling.  
-
-XML documentation comments use triple forward slashes (`///`) and an XML formatted comment body. For example:
-
-[!code-csharp[XML Documentation Comment](../../samples/snippets/csharp/concepts/codedoc/xml-comment.cs)]
 
 ## Walkthrough
 
@@ -282,8 +243,3 @@ Documenting code is recommended for many reasons. What follows are some best pra
 - Partial classes are fully supported, and documentation information will be concatenated into a single entry for that type.
 - The compiler verifies the syntax of the `<exception>`, `<include>`, `<param>`, `<see>`, `<seealso>`, and `<typeparam>` tags.
 - The compiler validates the parameters that contain file paths and references to other parts of the code.
-
-## See also
-
-- [XML Documentation Comments (C# Programming Guide)](programming-guide/xmldoc/index.md)
-- [Recommended Tags for Documentation Comments (C# Programming Guide)](programming-guide/xmldoc/recommended-tags-for-documentation-comments.md)
