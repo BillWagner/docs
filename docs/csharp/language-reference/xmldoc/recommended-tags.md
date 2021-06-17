@@ -129,7 +129,7 @@ If you want angle brackets to appear in the text of a documentation comment, use
 <summary>description</summary>
 ```
 
-The `<summary>` tag should be used to describe a type or a type member. Use [\<remarks>](#remarks) to add supplemental information to a type description. Use the [cref Attribute](#cref) to enable documentation tools such as [DocFX](https://dotnet.github.io/docfx/) and [Sandcastle](https://github.com/EWSoftware/SHFB) to create internal hyperlinks to documentation pages for code elements. The text for the `<summary>` tag is the only source of information about the type in IntelliSense, and is also displayed in the Object Browser Window.
+The `<summary>` tag should be used to describe a type or a type member. Use [\<remarks>](#remarks) to add supplemental information to a type description. Use the [cref Attribute](#cref-attribute) to enable documentation tools such as [DocFX](https://dotnet.github.io/docfx/) and [Sandcastle](https://github.com/EWSoftware/SHFB) to create internal hyperlinks to documentation pages for code elements. The text for the `<summary>` tag is the only source of information about the type in IntelliSense, and is also displayed in the Object Browser Window.
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="SummaryTag":::
 
@@ -195,7 +195,7 @@ The following example shows `cref` attributes used in [\<see>](#see) tags.
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="CRefTags":::
 
-When compiled into an assembly named *CRefTest.dll*, the program produces the following XML file. Notice that the `cref` attribute for the `GetZero` method, for example, has been transformed by the compiler to `"M:TestNamespace.TestClass.GetZero"`. The "M:" prefix means "method" and is a convention that is recognized by documentation tools such as DocFX and Sandcastle. For a complete list of prefixes, see [Processing the XML File](./processing-the-xml-file.md).
+When compiled into an assembly named *CRefTest.dll*, the program produces the following XML file. Notice that the `cref` attribute for the `GetZero` method, for example, has been transformed by the compiler to `"M:TestNamespace.TestClass.GetZero"`. The "M:" prefix means "method" and is a convention that is recognized by documentation tools such as DocFX and Sandcastle.
 
 ```xml  
 <?xml version="1.0"?>
@@ -357,7 +357,7 @@ The following output is generated when you compile the Test and Test2 classes wi
 <c>text</c>
 ```
 
-The `<c>` tag gives you a way to indicate that text within a description should be marked as code. Use [\<code>](./code.md) to indicate multiple lines as code.
+The `<c>` tag gives you a way to indicate that text within a description should be marked as code. Use [\<code>](#code) to indicate multiple lines as code.
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="cTag":::
   
@@ -379,7 +379,7 @@ The `<example>` tag lets you specify an example of how to use a method or other 
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExampleTag":::
 
-# \<list>
+## \<list>
 
 ```xml
 <list type="bullet|number|table">
@@ -420,7 +420,7 @@ The `<para>` tag is for use inside a tag, such as [\<summary>](#summary), [\<rem
 - `href="link"`: A clickable link to a given URL. For example, `<see href="https://github.com">GitHub</see>` produces a clickable link with text :::no-loc text="GitHub"::: that links to `https://github.com`.
 - `langword="keyword"`: A language keyword, such as `true`.
 
-The `<see>` tag lets you specify a link from within text. Use [\<seealso>](#seealso) to indicate that text should be placed in a See Also section. Use the [cref Attribute](#cref) to create internal hyperlinks to documentation pages for code elements. Also, ``href`` is a valid Attribute that will function as a hyperlink. The following example shows a `<see>` tag within a summary section.
+The `<see>` tag lets you specify a link from within text. Use [\<seealso>](#seealso) to indicate that text should be placed in a See Also section. Use the [cref Attribute](#cref-attribute) to create internal hyperlinks to documentation pages for code elements. Also, ``href`` is a valid Attribute that will function as a hyperlink. The following example shows a `<see>` tag within a summary section.
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="SeeExample":::
 
@@ -435,7 +435,7 @@ The `<see>` tag lets you specify a link from within text. Use [\<seealso>](#seea
 - `cref="member"`: A reference to a member or field that is available to be called from the current compilation environment. The compiler checks that the given code element exists and passes `member` to the element name in the output XML.`member` must appear within double quotation marks (" ").
 - `href="link"`: A clickable link to a given URL. For example, `<seealso href="https://github.com">GitHub</seealso>` produces a clickable link with text :::no-loc text="GitHub"::: that links to `https://github.com`.
 
-The `<seealso>` tag lets you specify the text that you might want to appear in a See Also section. Use [\<see>](./see.md) to specify a link from within text.
+The `<seealso>` tag lets you specify the text that you might want to appear in a See Also section. Use [\<see>](#see) to specify a link from within text.
 
 ## \<permission>
 

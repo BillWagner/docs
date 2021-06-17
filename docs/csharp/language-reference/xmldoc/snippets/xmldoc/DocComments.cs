@@ -58,10 +58,10 @@ namespace XmlTags
         //</ParamTag>
 
         //<ParamRefTag>
-        /// <summary>DoWork is a method in the TestClass class.
+        /// <summary>DoMoreWork is a method in the TestClass class.
         /// The <paramref name="int1"/> parameter takes a number.
         /// </summary>
-        public static void DoWork(int int1)
+        public static void DoMoreWork(int int1)
         {
         }
         //</ParamRefTag>
@@ -109,9 +109,9 @@ namespace XmlTags
         //</IncludeTag>
 
         //<cTag>
-        /// <summary><c>DoWork</c> is a method in the <c>TestClass</c> class.
+        /// <summary><c>DoAdditionalWork</c> is a method in the <c>TestClass</c> class.
         /// </summary>
-        public static void DoWork(int Int1)
+        public static void DoAdditionalWork(int Int1)
         {
         }
         //</cTag>
@@ -134,7 +134,7 @@ namespace XmlTags
 
         // <PermissionTag>
         /// <permission cref="System.Security.PermissionSet">Everyone can access this method.</permission>
-        public static void Test()
+        public static void Priviledged()
         {
         }
         // </PermissionTag>
