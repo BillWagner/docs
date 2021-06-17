@@ -123,6 +123,48 @@ If you want angle brackets to appear in the text of a documentation comment, use
 /// </summary>
 ```
 
+## General tags
+
+- summary
+- remarks
+
+## Organizing documentation text
+
+- inheritdoc
+- include
+
+## Formatting text
+
+- para
+- list
+-
+- c (inline code)
+- code (code block)
+- example
+
+## Generating links and references
+
+- see
+- seealso
+- cref:  references (see, seealso)
+- href
+
+## Documenting methods
+
+- returns
+- param
+- paramref
+- exception
+
+## Documenting properties
+
+- value
+
+## Generic types and methods
+
+- typeparam
+- typeparamref
+
 ## \<summary>
 
 ```xml
