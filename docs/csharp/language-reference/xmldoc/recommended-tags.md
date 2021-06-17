@@ -359,7 +359,7 @@ The following output is generated when you compile the Test and Test2 classes wi
 
 The `<c>` tag gives you a way to indicate that text within a description should be marked as code. Use [\<code>](./code.md) to indicate multiple lines as code.
 
-[!code-csharp[csProgGuideDocComments#2](~/samples/snippets/csharp/VS_Snippets_VBCSharp/csProgGuideDocComments/CS/DocComments.cs#2)]
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="cTag":::
   
 ## \<code>
 
@@ -367,7 +367,7 @@ The `<c>` tag gives you a way to indicate that text within a description should 
 <code>content</code>
 ```
 
-The `<code>` tag is used to indicate multiple lines of code. Use [\<c>](./code-inline.md) to indicate that single-line text within a description should be marked as code.
+The `<code>` tag is used to indicate multiple lines of code. Use [\<c>](#c) to indicate that single-line text within a description should be marked as code.
 
 ## \<example>
 
@@ -375,11 +375,9 @@ The `<code>` tag is used to indicate multiple lines of code. Use [\<c>](./code-i
 <example>description</example>
 ```
 
-The `<example>` tag lets you specify an example of how to use a method or other library member. This commonly involves using the [\<code>](./code.md) tag.
+The `<example>` tag lets you specify an example of how to use a method or other library member. This commonly involves using the [\<code>](#code) tag.
 
-Compile with [**DocumentationFile**](../../language-reference/compiler-options/output.md#documentationfile) to process documentation comments to a file.
-
-[!code-csharp[csProgGuideDocComments#3](~/samples/snippets/csharp/VS_Snippets_VBCSharp/csProgGuideDocComments/CS/DocComments.cs#3)]
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExampleTag":::
 
 # \<list>
 
@@ -398,7 +396,7 @@ Compile with [**DocumentationFile**](../../language-reference/compiler-options/o
 
 The `<listheader>` block is used to define the heading row of either a table or definition list. When defining a table, you only need to supply an entry for term in the heading. Each item in the list is specified with an `<item>` block. When creating a definition list, you will need to specify both `term` and `description`. However, for a table, bulleted list, or numbered list, you only need to supply an entry for `description`. A list or table can have as many `<item>` blocks as needed.
 
-[!code-csharp[csProgGuideDocComments#6](~/samples/snippets/csharp/VS_Snippets_VBCSharp/csProgGuideDocComments/CS/DocComments.cs#6)]
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ListTag":::
 
 ## \<para>
 
@@ -406,7 +404,7 @@ The `<listheader>` block is used to define the heading row of either a table or 
 <para>content</para>
 ```
 
-The `<para>` tag is for use inside a tag, such as [\<summary>](./summary.md), [\<remarks>](./remarks.md), or [\<returns>](./returns.md), and lets you add structure to the text.
+The `<para>` tag is for use inside a tag, such as [\<summary>](#summary), [\<remarks>](#remarks), or [\<returns>](#returns), and lets you add structure to the text.
 
 ## \<see>
 
@@ -422,9 +420,9 @@ The `<para>` tag is for use inside a tag, such as [\<summary>](./summary.md), [\
 - `href="link"`: A clickable link to a given URL. For example, `<see href="https://github.com">GitHub</see>` produces a clickable link with text :::no-loc text="GitHub"::: that links to `https://github.com`.
 - `langword="keyword"`: A language keyword, such as `true`.
 
-The `<see>` tag lets you specify a link from within text. Use [\<seealso>](./seealso.md) to indicate that text should be placed in a See Also section. Use the [cref Attribute](./cref-attribute.md) to create internal hyperlinks to documentation pages for code elements. Also, ``href`` is a valid Attribute that will function as a hyperlink. The following example shows a `<see>` tag within a summary section.
+The `<see>` tag lets you specify a link from within text. Use [\<seealso>](#seealso) to indicate that text should be placed in a See Also section. Use the [cref Attribute](#cref) to create internal hyperlinks to documentation pages for code elements. Also, ``href`` is a valid Attribute that will function as a hyperlink. The following example shows a `<see>` tag within a summary section.
 
-[!code-csharp[csProgGuideDocComments#12](~/samples/snippets/csharp/VS_Snippets_VBCSharp/csProgGuideDocComments/CS/DocComments.cs#12)]
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="SeeExample":::
 
 ## \<seealso>
 
@@ -450,4 +448,4 @@ The `<seealso>` tag lets you specify the text that you might want to appear in a
 
 The `<permission>` tag lets you document the access of a member. The <xref:System.Security.PermissionSet> class lets you specify access to a member.
 
-[!code-csharp[csProgGuideDocComments#8](~/samples/snippets/csharp/VS_Snippets_VBCSharp/csProgGuideDocComments/CS/DocComments.cs#8)]
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="PermissionTag":::

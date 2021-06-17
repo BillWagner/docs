@@ -107,6 +107,38 @@ namespace XmlTags
             }
         }
         //</IncludeTag>
+
+        //<cTag>
+        /// <summary><c>DoWork</c> is a method in the <c>TestClass</c> class.
+        /// </summary>
+        public static void DoWork(int Int1)
+        {
+        }
+        //</cTag>
+
+        //<ListTag>
+        /// <summary>Here is an example of a bulleted list:
+        /// <list type="bullet">
+        /// <item>
+        /// <description>Item 1.</description>
+        /// </item>
+        /// <item>
+        /// <description>Item 2.</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        static void BulletListMethod()
+        {
+        }
+        //</ListTag>
+
+        // <PermissionTag>
+        /// <permission cref="System.Security.PermissionSet">Everyone can access this method.</permission>
+        public static void Test()
+        {
+        }
+        // </PermissionTag>
+
     }
 
     //<ValueTag>
@@ -132,27 +164,59 @@ namespace XmlTags
     //</ValueTag>
 }
 
-//-----------------------------------------------------------------------------
-namespace Wrap2
+// <SeeExample>
+/// <summary>
+/// The main <c>Math</c> class.
+/// Contains all methods for performing basic math functions.
+/// </summary>
+public class Math
 {
-    //<Snippet2>
-
-    /// text for class TestClass
-    public class TestClass
+    // <ExampleTag>
+    /// <summary>
+    /// Adds two integers and returns the result.
+    /// </summary>
+    /// <returns>
+    /// The sum of two integers.
+    /// </returns>
+    /// <example>
+    /// <code>
+    /// int c = Math.Add(4, 5);
+    /// if (c > 10)
+    /// {
+    ///     Console.WriteLine(c);
+    /// }
+    /// </code>
+    /// </example>
+    /// <exception cref="System.OverflowException">Thrown when one parameter is max
+    /// and the other is greater than 0.</exception>
+    /// See <see cref="Math.Add(double, double)"/> to add doubles.
+    public static int Add(int a, int b)
     {
-        /// <summary><c>DoWork</c> is a method in the <c>TestClass</c> class.
-        /// </summary>
-        public static void DoWork(int Int1)
-        {
-        }
+        if ((a == int.MaxValue && b > 0) || (b == int.MaxValue && a > 0))
+            throw new System.OverflowException();
 
-        /// text for Main
-        static void Main()
-        {
-        }
+        return a + b;
     }
-    //</Snippet2>
+    // </ExampleTag>
+
+    /// <summary>
+    /// Adds two doubles and returns the result.
+    /// </summary>
+    /// <returns>
+    /// The sum of two doubles.
+    /// </returns>
+    /// <exception cref="System.OverflowException">Thrown when one parameter is max
+    /// and the other is greater than zero.</exception>
+    /// See <see cref="Math.Add(int, int)"/> to add integers.
+    public static double Add(double a, double b)
+    {
+        if ((a == double.MaxValue && b > 0) || (b == double.MaxValue && a > 0))
+            throw new System.OverflowException();
+
+        return a + b;
+    }
 }
+// </SeeExample>
 
 //-----------------------------------------------------------------------------
 //<CRefTags>
@@ -229,163 +293,7 @@ namespace TestNamespace
 }
 //</CRefTags>
 
-//-----------------------------------------------------------------------------
-namespace Wrap6
-{
-    //<Snippet6>
 
-    /// text for class TestClass
-    public class TestClass
-    {
-        /// <summary>Here is an example of a bulleted list:
-        /// <list type="bullet">
-        /// <item>
-        /// <description>Item 1.</description>
-        /// </item>
-        /// <item>
-        /// <description>Item 2.</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        static void Main()
-        {
-        }
-    }
-    //</Snippet6>
-}
-
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-namespace Wrap8
-{
-    //<Snippet8>
-
-    class TestClass
-    {
-        /// <permission cref="System.Security.PermissionSet">Everyone can access this method.</permission>
-        public static void Test()
-        {
-        }
-
-        static void Main()
-        {
-        }
-    }
-    //</Snippet8>
-}
-
-
-//-----------------------------------------------------------------------------
-namespace Wrap15
-{
-    //<Snippet15>
-
-    /// <summary>
-    /// Class level summary documentation goes here.
-    /// </summary>
-    /// <remarks>
-    /// Longer comments can be associated with a type or member through
-    /// the remarks tag.
-    /// </remarks>
-    public class TestClass : TestInterface
-    {
-        /// <summary>
-        /// Store for the Name property.
-        /// </summary>
-        private string _name = null;
-
-        /// <summary>
-        /// The class constructor.
-        /// </summary>
-        public TestClass()
-        {
-            // TODO: Add Constructor Logic here.
-        }
-
-        /// <summary>
-        /// Name property.
-        /// </summary>
-        /// <value>
-        /// A value tag is used to describe the property value.
-        /// </value>
-        public string Name
-        {
-            get
-            {
-                if (_name == null)
-                {
-                    throw new System.Exception("Name is null");
-                }
-                return _name;
-            }
-        }
-
-        /// <summary>
-        /// Description for SomeMethod.
-        /// </summary>
-        /// <param name="s"> Parameter description for s goes here.</param>
-        /// <seealso cref="System.String">
-        /// You can use the cref attribute on any tag to reference a type or member
-        /// and the compiler will check that the reference exists.
-        /// </seealso>
-        public void SomeMethod(string s)
-        {
-        }
-
-        /// <summary>
-        /// Some other method.
-        /// </summary>
-        /// <returns>
-        /// Return values are described through the returns tag.
-        /// </returns>
-        /// <seealso cref="SomeMethod(string)">
-        /// Notice the use of the cref attribute to reference a specific method.
-        /// </seealso>
-        public int SomeOtherMethod()
-        {
-            return 0;
-        }
-
-        public int InterfaceMethod(int n)
-        {
-            return n * n;
-        }
-
-        /// <summary>
-        /// The entry point for the application.
-        /// </summary>
-        /// <param name="args"> A list of command line arguments.</param>
-        static int Main(System.String[] args)
-        {
-            // TODO: Add code to start application here.
-            return 0;
-        }
-    }
-
-    /// <summary>
-    /// Documentation that describes the interface goes here.
-    /// </summary>
-    /// <remarks>
-    /// Details about the interface go here.
-    /// </remarks>
-    interface TestInterface
-    {
-        /// <summary>
-        /// Documentation that describes the method goes here.
-        /// </summary>
-        /// <param name="n">
-        /// Parameter n requires an integer argument.
-        /// </param>
-        /// <returns>
-        /// The method returns an integer.
-        /// </returns>
-        int InterfaceMethod(int n);
-    }
-    //</Snippet15>
-}
-
-//-----------------------------------------------------------------------------
 namespace InheritDoc
 {
     //<InheritDocTag>
