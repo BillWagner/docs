@@ -108,8 +108,12 @@ Some of the recommended tags can be used on any language element. Others have mo
 
 - [General Tags](#general-tags) used for multiple elements - These are the minimum set for any API tasks.
     :::row:::
-        :::column::: `<summary>` :::column-end:::
-        :::column::: `<remarks>` \*\* :::column-end:::
+        :::column:::
+            `<summary>`
+         :::column-end:::
+        :::column:::
+            `<remarks>` \*\*
+        :::column-end:::
     :::row-end:::
 - [Reuse documentation text](#reuse-documentation-text) - These tags provide tools that make it easier to reuse XML comments.
     :::row:::
