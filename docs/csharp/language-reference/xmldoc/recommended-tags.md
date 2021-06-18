@@ -114,7 +114,7 @@ C# documentation comments use XML elements to define the structure of the output
   - see
   - seealso
   - cref
-  - href 
+  - href
 - Tags for methods
   - returns
   - param
@@ -125,7 +125,6 @@ C# documentation comments use XML elements to define the structure of the output
 - Tags for generic classes and methods
   - typeparam
   - typeparamref
-
 
 The compiler will process any tag that is valid XML. The tags described in this article provide generally used functionality in user documentation. The compiler verifies the syntax of the following XML elements in comments:
 

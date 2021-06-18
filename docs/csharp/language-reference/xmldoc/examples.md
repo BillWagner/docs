@@ -382,7 +382,7 @@ And there you have it: our code is back to being readable, and no documentation 
 
 The `file` attribute represents the name of the XML file containing the documentation.
 
-The `path` attribute represents an [XPath](../../../../standard/data/xml/xpath-queries-and-namespaces.md) query to the `tag name` present in the specified `file`.
+The `path` attribute represents an [XPath](../../../standard/data/xml/xpath-queries-and-namespaces.md) query to the `tag name` present in the specified `file`.
 
 The `name` attribute represents the name specifier in the tag that precedes the comments.
 
