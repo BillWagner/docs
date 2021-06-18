@@ -117,8 +117,12 @@ Some of the recommended tags can be used on any language element. Others have mo
     :::row-end:::
 - [Reuse documentation text](#reuse-documentation-text) - These tags provide tools that make it easier to reuse XML comments.
     :::row:::
-        :::column::: `<inheritdoc>` \*\* :::column-end:::
-        :::column::: `<include>` \* :::column-end:::
+        :::column:::
+            `<inheritdoc>` \*\*
+        :::column-end:::
+        :::column:::
+            `<include>` \*
+        :::column-end:::
     :::row-end:::
 - [Format documentation output](#format-documentation-output) - These tags provide formatting directions for tools that generate documentation.
     :::row:::
