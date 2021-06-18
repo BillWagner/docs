@@ -126,34 +126,66 @@ Some of the recommended tags can be used on any language element. Others have mo
     :::row-end:::
 - [Format documentation output](#format-documentation-output) - These tags provide formatting directions for tools that generate documentation.
     :::row:::
-        :::column::: `<para>`:::column-end:::
-        :::column::: `<list>`:::column-end:::
-        :::column::: `<c>`:::column-end:::
-        :::column::: `<code>`:::column-end:::
-        :::column::: `<example>` \*\*:::column-end:::
+        :::column:::
+            `<para>`
+        :::column-end:::
+        :::column:::
+            `<list>`
+        :::column-end:::
+        :::column:::
+            `<c>`
+        :::column-end:::
+        :::column:::
+            `<code>`
+        :::column-end:::
+        :::column:::
+            `<example>` \*\*
+        :::column-end:::
     :::row-end:::
 - [Generate links and references](#generate-links-and-references) - These tags generate links to other documentation.
     :::row:::
-        :::column::: `<see>` \*:::column-end:::
-        :::column::: `<seealso>` \*:::column-end:::
-        :::column::: `<cref>`:::column-end:::
-        :::column::: `<href>`:::column-end:::
+        :::column:::
+            `<see>` \*
+        :::column-end:::
+        :::column:::
+            `<seealso>` \*
+        :::column-end:::
+        :::column:::
+            `<cref>`
+        :::column-end:::
+        :::column:::
+            `<href>`
+        :::column-end:::
     :::row-end:::
 - [Tags used for methods](#document-methods) - These tags are used when documenting methods.
     :::row:::
-        :::column::: `<returns>`:::column-end:::
-        :::column::: `<param>` \*:::column-end:::
-        :::column::: `<paramref>`:::column-end:::
-        :::column::: `<exception>` \*:::column-end:::
+        :::column:::
+            `<returns>`
+        :::column-end:::
+        :::column:::
+            `<param>` \*
+        :::column-end:::
+        :::column:::
+            `<paramref>`
+        :::column-end:::
+        :::column:::
+            `<exception>` \*
+        :::column-end:::
     :::row-end:::
 - [Tags used for properties](#document-properties) - This tag is used only on C# properties.
     :::row:::
-        :::column::: `<value>`:::column-end:::
+        :::column:::
+            `<value>`
+        :::column-end:::
     :::row-end:::
 - [Tags for generic types and methods](#generic-types-and-methods) - These tags are used only on generic types and methods
     :::row:::
-        :::column::: `<typeparam>` \*:::column-end:::
-        :::column::: `<typeparamref>`:::column-end:::
+        :::column:::
+            `<typeparam>` \*
+        :::column-end:::
+        :::column:::
+            `<typeparamref>`
+        :::column-end:::
     :::row-end:::
 
 The compiler verifies the syntax of the elements followed by a single \* in the preceding list. Visual Studio provides intellisense for the tags verified by the compiler and all tags followed by \*\* in the preceding list.
