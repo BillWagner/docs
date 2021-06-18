@@ -1,4 +1,5 @@
-﻿namespace SeeTag
+﻿
+namespace ExceptionTag
 {
     /*
         The main Math class
@@ -27,7 +28,6 @@
         /// </example>
         /// <exception cref="System.OverflowException">Thrown when one parameter is max
         /// and the other is greater than 0.</exception>
-        /// See <see cref="Math.Add(double, double)"/> to add doubles.
             public static int Add(int a, int b)
             {
                 if ((a == int.MaxValue && b > 0) || (b == int.MaxValue && a > 0))
@@ -44,13 +44,36 @@
         /// </returns>
         /// <exception cref="System.OverflowException">Thrown when one parameter is max
         /// and the other is greater than zero.</exception>
-        /// See <see cref="Math.Add(int, int)"/> to add integers.
             public static double Add(double a, double b)
             {
                 if ((a == double.MaxValue && b > 0) || (b == double.MaxValue && a > 0))
                     throw new System.OverflowException();
 
                 return a + b;
+            }
+
+            /// <summary>
+        /// Divides an integer by another and returns the result.
+        /// </summary>
+        /// <returns>
+        /// The division of two integers.
+        /// </returns>
+        /// <exception cref="System.DivideByZeroException">Thrown when a division by zero occurs.</exception>
+            public static int Divide(int a, int b)
+            {
+                return a / b;
+            }
+
+            /// <summary>
+        /// Divides a double by another and returns the result.
+        /// </summary>
+        /// <returns>
+        /// The division of two doubles.
+        /// </returns>
+        /// <exception cref="System.DivideByZeroException">Thrown when a division by zero occurs.</exception>
+            public static double Divide(double a, double b)
+            {
+                return a / b;
             }
         }
 }

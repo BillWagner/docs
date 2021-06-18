@@ -208,7 +208,7 @@ XML documentation starts with `///`. When you create a new project, the wizards 
 
 - The documentation must be well-formed XML. If the XML is not well-formed, a warning is generated and the documentation file will contain a comment that says that an error was encountered.
 
-- Developers are free to create their own set of tags. There is a [recommended set of tags](recommended-tags-for-documentation-comments.md). Some of the recommended tags have special meanings:
+- Developers are free to create their own set of tags. There is a [recommended set of tags](recommended-tags.md). Some of the recommended tags have special meanings:
 
   - The `<param>` tag is used to describe parameters. If used, the compiler verifies that the parameter exists and that all parameters are described in the documentation. If the verification fails, the compiler issues a warning.
 
@@ -252,7 +252,7 @@ The `<remarks>` tag supplements the information about types or members that the 
 The `<returns>` tag describes the return value of a method declaration.
 As before, the following example illustrates the `<returns>` tag on the first `Add` method. You can do the same on other methods.
 
-:::code language="csharp" source="./snippets/xmldoc/returns-tag.cs":::
+:::code language="csharp" source="./snippets/xmldoc/returns-tag.cs" id="ReturnTag":::
 
 ## \<value>
 
@@ -266,7 +266,7 @@ Assuming your `Math` library had a static property called `PI`, here's how you'd
 You use the `<example>` tag to include an example in your XML documentation.
 This involves using the child `<code>` tag.
 
-:::code language="csharp" source="./snippets/xmldoc/example-tag.cs":::
+:::code language="csharp" source="./snippets/xmldoc/example-tag.cs" ID="ExampleTag":::
 
 The `code` tag preserves line breaks and indentation for longer examples.
 
@@ -382,7 +382,7 @@ And there you have it: our code is back to being readable, and no documentation 
 
 The `file` attribute represents the name of the XML file containing the documentation.
 
-The `path` attribute represents an [XPath](../standard/data/xml/xpath-queries-and-namespaces.md) query to the `tag name` present in the specified `file`.
+The `path` attribute represents an [XPath](../../../../standard/data/xml/xpath-queries-and-namespaces.md) query to the `tag name` present in the specified `file`.
 
 The `name` attribute represents the name specifier in the tag that precedes the comments.
 
