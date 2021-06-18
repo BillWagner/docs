@@ -96,51 +96,59 @@ helpviewer_keywords:
 ---
 # Recommend XML tags for C# documentation comments
 
-C# documentation comments use XML elements to define the structure of the output documentation. One consequence of this decision is that you can add any valid XML in your documentation comments. The C# compiler copies these elements into the output XML file. While you can use any valid XML in your comments (including any valid HTML element), While you can put any tags into your documentation comments, this article describes the recommended tags for the most common language constructs. Some of the recommended tags can be used on any language element. Others have more specialized usage. Finally, some of the tags are used to format text in your documentation. this article describes the recommended tags organized by their use:
+C# documentation comments use XML elements to define the structure of the output documentation. One consequence of this decision is that you can add any valid XML in your documentation comments. The C# compiler copies these elements into the output XML file. While you can use any valid XML in your comments (including any valid HTML element), Documenting code is recommended for many reasons. What follows are some best practices, general use case scenarios, and things that you should know when using XML documentation tags in your C# code. While you can put any tags into your documentation comments, this article describes the recommended tags for the most common language constructs. In all cases, you should adhere to these recommendations:
 
-- Tags used for multiple elements - You'll use these tags in almost all of your C# documentation
-  - summary
-  - remarks
-- Tags that improve efficiency - These tags provide tools that make it easier to reuse XML comments.
-  - inheritdoc
-  - include
-- Tags that format text
-  - para
-  - list
-  - c
-  - code
-  - example
-- Tags that generate links and references
-  - see
-  - seealso
-  - cref
-  - href
-- Tags for methods
-  - returns
-  - param
-  - paramref
-  - exception
-- Tags for properties
-  - value
-- Tags for generic classes and methods
-  - typeparam
-  - typeparamref
+- For the sake of consistency, all publicly visible types and their members should be documented.
+- Private members can also be documented using XML comments. However, this exposes the inner (potentially confidential) workings of your library.
+- At a bare minimum, types and their members should have a `<summary>` tag because its content is needed for IntelliSense.
+- Documentation text should be written using complete sentences ending with full stops.
+- Partial classes are fully supported, and documentation information will be concatenated into a single entry for that type.
 
-The compiler will process any tag that is valid XML. The tags described in this article provide generally used functionality in user documentation. The compiler verifies the syntax of the following XML elements in comments:
+Some of the recommended tags can be used on any language element. Others have more specialized usage. Finally, some of the tags are used to format text in your documentation. this article describes the recommended tags organized by their use:
 
-- `<exception>`
-- `<include>`
-- `<param>`
-- `<permission>`
-- `<see>`
-- `<seealso>`
-- `<typeparam>`
+- [General Tags](#general-tags) used for multiple elements - These are the minimum set for any API tasks.
+    :::row:::
+        :::column::: `<summary>`:::column-end:::
+        :::column::: `<remarks>` \*\*:::column-end:::
+    :::row-end:::
+- [Reuse documentation text](#reuse-documentation-text) - These tags provide tools that make it easier to reuse XML comments.
+    :::row:::
+        :::column::: `<inheritdoc>` \*\*:::column-end:::
+        :::column::: `<include>` \*:::column-end:::
+    :::row-end:::
+- [Format documentation output](#format-documentation-output) - These tags provide formatting directions for tools that generate documentation.
+    :::row:::
+        :::column::: `<para>`:::column-end:::
+        :::column::: `<list>`:::column-end:::
+        :::column::: `<c>`:::column-end:::
+        :::column::: `<code>`:::column-end:::
+        :::column::: `<example>` \*\*:::column-end:::
+    :::row-end:::
+- [Generate links and references](#generate-links-and-references) - These tags generate links to other documentation.
+    :::row:::
+        :::column::: `<see>` \*:::column-end:::
+        :::column::: `<seealso>` \*:::column-end:::
+        :::column::: `<cref>`:::column-end:::
+        :::column::: `<href>`:::column-end:::
+    :::row-end:::
+- [Tags used for methods](#document-methods) - These tags are used when documenting methods.
+    :::row:::
+        :::column::: `<returns>`:::column-end:::
+        :::column::: `<param>` \*:::column-end:::
+        :::column::: `<paramref>`:::column-end:::
+        :::column::: `<exception>` \*:::column-end:::
+    :::row-end:::
+- [Tags used for properties](#document-properties) - This tag is used only on C# properties.
+    :::row:::
+        :::column::: `<value>`:::column-end:::
+    :::row-end:::
+- [Tags for generic types and methods](#generic-types-and-methods) - These tags are used only on generic types and methods
+    :::row:::
+        :::column::: `<typeparam>` \*:::column-end:::
+        :::column::: `<typeparamref>`:::column-end:::
+    :::row-end:::
 
-Visual Studio provides intellisense for the tags verified by the compiler and the following additional tags:
-
-- `<example>`
-- `<inheritdoc>`
-- `<remarks>`
+The compiler verifies the syntax of the elements followed by a single \* in the preceding list. Visual Studio provides intellisense for the tags verified by the compiler and all tags followed by \*\* in the preceding list.
 
 > [!NOTE]
 > Documentation comments cannot be applied to a namespace.
@@ -152,18 +160,6 @@ If you want angle brackets to appear in the text of a documentation comment, use
 /// This property always returns a value &lt; 1.
 /// </summary>
 ```
-
-## Recommendations
-
-Documenting code is recommended for many reasons. What follows are some best practices, general use case scenarios, and things that you should know when using XML documentation tags in your C# code.
-
-- For the sake of consistency, all publicly visible types and their members should be documented. If you must do it, do it all.
-- Private members can also be documented using XML comments. However, this exposes the inner (potentially confidential) workings of your library.
-- At a bare minimum, types and their members should have a `<summary>` tag because its content is needed for IntelliSense.
-- Documentation text should be written using complete sentences ending with full stops.
-- Partial classes are fully supported, and documentation information will be concatenated into a single entry for that type.
-- The compiler verifies the syntax of the `<exception>`, `<include>`, `<param>`, `<see>`, `<seealso>`, and `<typeparam>` tags.
-- The compiler validates the parameters that contain file paths and references to other parts of the code.
 
 ## General tags
 
@@ -187,7 +183,7 @@ The `<remarks>` tag is used to add information about a type, supplementing the i
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="RemarksTag":::
 
-## Organizing documentation text
+## Reuse documentation text
 
 ### \<inheritdoc>
 
@@ -248,7 +244,7 @@ The following output is generated when you compile the Test and Test2 classes wi
 </doc>
 ```
 
-## Formatting text
+## Format documentation output
 
 ### \<para>
 
@@ -305,7 +301,7 @@ The `<example>` tag lets you specify an example of how to use a method or other 
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExampleTag":::
 
-## Generating links and references
+## Generate links and references
 
 ### \<see>
 
@@ -409,7 +405,7 @@ When compiled into an assembly named *CRefTest.dll*, the program produces the fo
 
 ### href
 
-## Documenting methods
+## Document methods
 
 ### \<returns>
 
@@ -457,7 +453,7 @@ The `<exception>` tag lets you specify which exceptions can be thrown. This tag 
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExceptionTag":::
 
-## Documenting properties
+## Document properties
 
 ### \<value>
 
