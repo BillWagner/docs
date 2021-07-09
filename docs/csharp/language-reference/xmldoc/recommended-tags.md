@@ -103,83 +103,31 @@ C# documentation comments use XML elements to define the structure of the output
 Some of the recommended tags can be used on any language element. Others have more specialized usage. Finally, some of the tags are used to format text in your documentation. this article describes the recommended tags organized by their use:
 
 - [General Tags](#general-tags) used for multiple elements - These are the minimum set for any API tasks.
-    :::row:::
-        :::column:::
-            `<summary>`
-         :::column-end:::
-        :::column:::
-            `<remarks>` \*\*
-        :::column-end:::
-    :::row-end:::
+  - [`<summary>`](#summary)
+  - [`<remarks>`](#remarks) \*\*
 - [Tags used for members](#document-members) - These tags are used when documenting methods and properties.
-    :::row:::
-        :::column:::
-            `<returns>`
-        :::column-end:::
-        :::column:::
-            `<param>` \*
-        :::column-end:::
-        :::column:::
-            `<paramref>`
-        :::column-end:::
-        :::column:::
-            `<exception>` \*
-        :::column-end:::
-        :::column:::
-            `<value>`
-        :::column-end:::
-    :::row-end:::
+  - [`<returns>`](#returns)
+  - [`<param>`](#param) \*
+  - [`<paramref>`](#paramref)
+  - [`<exception>`](#exception) \*
+  - [`<value>`](#value)
 - [Format documentation output](#format-documentation-output) - These tags provide formatting directions for tools that generate documentation.
-    :::row:::
-        :::column:::
-            `<para>`
-        :::column-end:::
-        :::column:::
-            `<list>`
-        :::column-end:::
-        :::column:::
-            `<c>`
-        :::column-end:::
-        :::column:::
-            `<code>`
-        :::column-end:::
-        :::column:::
-            `<example>` \*\*
-        :::column-end:::
-    :::row-end:::
+  - [`<para>`](#para)
+  - [`<list>`](#list)
+  - [`<c>`](#c)
+  - [`<code>`](#code)
+  - [`<example>`](#example) \*\*
 - [Reuse documentation text](#reuse-documentation-text) - These tags provide tools that make it easier to reuse XML comments.
-    :::row:::
-        :::column:::
-            `<inheritdoc>` \*\*
-        :::column-end:::
-        :::column:::
-            `<include>` \*
-        :::column-end:::
-    :::row-end:::
+  - `[<inheritdoc>`](#inheritdoc) \*\*
+  - [`<include>`](#include) \*
 - [Generate links and references](#generate-links-and-references) - These tags generate links to other documentation.
-    :::row:::
-        :::column:::
-            `<see>` \*
-        :::column-end:::
-        :::column:::
-            `<seealso>` \*
-        :::column-end:::
-        :::column:::
-            `<cref>`
-        :::column-end:::
-        :::column:::
-            `<href>`
-        :::column-end:::
-    :::row-end:::
+  - [`<see>`](#see) \*
+  - [`<seealso>`](#seealso) \*
+  - [`<cref>`](#cref)
+  - [`<href>`](#href)
 - [Tags for generic types and methods](#generic-types-and-methods) - These tags are used only on generic types and methods
-    :::row:::
-        :::column:::
-            `<typeparam>` \*
-        :::column-end:::
-        :::column:::
-            `<typeparamref>`
-        :::column-end:::
-    :::row-end:::
+  - [`<typeparam>`](#typeparam) \*
+  - [`<typeparamref>`](#typeparamref)
 
 The compiler verifies the syntax of the elements followed by a single \* in the preceding list. Visual Studio provides intellisense for the tags verified by the compiler and all tags followed by \*\* in the preceding list.
 
@@ -250,7 +198,7 @@ The `<paramref>` tag gives you a way to indicate that a word in the code comment
 <exception cref="member">description</exception>
 ```
 
-- cref = " `member`": A reference to an exception that is available from the current compilation environment. The compiler checks that the given exception exists and translates `member` to the canonical element name in the output XML. `member` must appear within double quotation marks (" ").
+- cref = "`member`": A reference to an exception that is available from the current compilation environment. The compiler checks that the given exception exists and translates `member` to the canonical element name in the output XML. `member` must appear within double quotation marks (" ").
 
 The `<exception>` tag lets you specify which exceptions can be thrown. This tag can be applied to definitions for methods, properties, events, and indexers.
 
@@ -267,7 +215,14 @@ The `<value>` tag lets you describe the value that a property represents. When y
 ### \<para>
 
 ```xml
-<para>content</para>
+<remarks>
+    <para>
+        This is an introductory paragraph.
+    </para>
+    <para>
+        This paragraph contains more details.
+    </para>
+</remarks>
 ```
 
 The `<para>` tag is for use inside a tag, such as [\<summary>](#summary), [\<remarks>](#remarks), or [\<returns>](#returns), and lets you add structure to the text.
@@ -281,8 +236,8 @@ The `<para>` tag is for use inside a tag, such as [\<summary>](#summary), [\<rem
         <description>description</description>
     </listheader>
     <item>
-        <term>term</term>
-        <description>description</description>
+        <term>Assembly</term>
+        <description>The library or executable built from a compilation.</description>
     </item>
 </list>
 ```
@@ -300,7 +255,10 @@ The `<c>` tag gives you a way to indicate that text within a description should 
 ### \<code>
 
 ```xml
-<code>content</code>
+<code>
+    var index = 5;
+    index++;
+</code>
 ```
 
 The `<code>` tag is used to indicate multiple lines of code. Use [\<c>](#c) to indicate that single-line text within a description should be marked as code.
@@ -308,7 +266,13 @@ The `<code>` tag is used to indicate multiple lines of code. Use [\<c>](#c) to i
 ### \<example>
 
 ```xml
-<example>description</example>
+<example>
+This shows how to increment an integer.
+<code>
+    var index = 5;
+    index++;
+</code>
+</example>
 ```
 
 The `<example>` tag lets you specify an example of how to use a method or other library member. This commonly involves using the [\<code>](#code) tag.
@@ -385,19 +349,19 @@ The following example shows `cref` attributes used in [\<see>](#see) tags.
 ### \<typeparam>
 
 ```xml
-<typeparam name="name">description</typeparam>
+<typeparam name="TResult">The type returned from this method</typeparam>
 ```
 
-- `name`: The name of the type parameter. Enclose the name in double quotation marks (" ").
+- `TResult`: The name of the type parameter. Enclose the name in double quotation marks (" ").
 
 The `<typeparam>` tag should be used in the comment for a generic type or method declaration to describe a type parameter. Add a tag for each type parameter of the generic type or method. The text for the `<typeparam>` tag will be displayed in IntelliSense, the [Object Browser Window](/visualstudio/ide/viewing-the-structure-of-code#BKMK_ObjectBrowser) code comment web report.
 
 ### \<typeparamref>
 
 ```xml
-<typeparamref name="name"/>
+<typeparamref name="TKey"/>
 ```
 
-- `name`: The name of the type parameter. Enclose the name in double quotation marks (" ").
+- `TKey`: The name of the type parameter. Enclose the name in double quotation marks (" ").
 
 Use this tag to enable consumers of the documentation file to format the word in some distinct way, for example in italics.
