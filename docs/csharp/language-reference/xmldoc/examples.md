@@ -1,10 +1,154 @@
 ---
 title: "How to use the XML documentation features - C# programming guide"
 description: Learn how to use XML documentation features. See code examples and view additional available resources.
-ms.date: 06/01/2018
+ms.date: 07/12/2021
 ms.topic: how-to
 ---
 # How to use the XML documentation features
+
+## Document a class
+
+- general
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="SummaryTag":::
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="RemarksTag":::
+
+- methods
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ReturnsTag":::
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ParamTag":::
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ParamRefTag":::
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExceptionTag":::
+
+- properties
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ValueTag":::
+
+- format output
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ListTag":::
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="cTag":::
+  
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExampleTag":::
+
+## Document a hierarchy of classes and interfaces
+
+- inheritdoc
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="InheritDocTag":::
+
+This is a multifile example. The following is the first file, which uses `<include>`.
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="IncludeTag":::
+
+The second file, *xml_include_tag.xml*, contains the following documentation comments.
+
+:::code language="xml" source="./snippets/xmldoc/xml_include_tag.xml" :::
+
+The following output is generated when you compile the Test and Test2 classes with the following command line: `-doc:DocFileName.xml.` In Visual Studio, you specify the XML doc comments option in the Build pane of the Project Designer. When the C# compiler sees the `<include>` tag, it searches for documentation comments in *xml_include_tag.doc* instead of the current source file. The compiler then generates *DocFileName.xml*, and this is the file that is consumed by documentation tools such as [Sandcastle](https://github.com/EWSoftware/SHFB) to produce the final documentation.
+
+```xml
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>xml_include_tag</name>
+    </assembly>
+    <members>
+        <member name="T:Test">
+            <summary>
+                The summary for this type.
+            </summary>
+        </member>
+        <member name="T:Test2">
+            <summary>
+                The summary for this other type.
+            </summary>
+        </member>
+    </members>
+</doc>
+```
+
+- links and references
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="SeeExample":::
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="CRefTags":::
+
+When compiled into an assembly named *CRefTest.dll*, the program produces the following XML file. Notice that the `cref` attribute for the `GetZero` method, for example, has been transformed by the compiler to `"M:TestNamespace.TestClass.GetZero"`. The "M:" prefix means "method" and is a convention that is recognized by documentation tools such as DocFX and Sandcastle.
+
+```xml  
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CRefTest</name>
+    </assembly>
+    <members>
+        <member name="T:TestNamespace.TestClass">
+            <summary>
+            TestClass contains several cref examples.
+            </summary>
+        </member>
+        <member name="M:TestNamespace.TestClass.#ctor">
+            <summary>
+            This sample shows how to specify the <see cref="T:TestNamespace.TestClass"/> constructor as a cref attribute.
+            </summary>
+        </member>
+        <member name="M:TestNamespace.TestClass.#ctor(System.Int32)">
+            <summary>
+            This sample shows how to specify the <see cref="M:TestNamespace.TestClass.#ctor(System.Int32)"/> constructor as a cref attribute.
+            </summary>
+        </member>
+        <member name="M:TestNamespace.TestClass.GetZero">
+            <summary>
+            The GetZero method.
+            </summary>
+            <example>
+            This sample shows how to call the <see cref="M:TestNamespace.TestClass.GetZero"/> method.
+            <code>
+            class TestClass
+            {
+                static int Main()
+                {
+                    return GetZero();
+                }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:TestNamespace.TestClass.GetGenericValue``1(``0)">
+            <summary>
+            The GetGenericValue method.
+            </summary>
+            <remarks>
+            This sample shows how to specify the <see cref="M:TestNamespace.TestClass.GetGenericValue``1(``0)"/> method as a cref attribute.
+            </remarks>
+        </member>
+        <member name="T:TestNamespace.GenericClass`1">
+            <summary>
+            GenericClass.
+            </summary>
+            <remarks>
+            This example shows how to specify the <see cref="T:TestNamespace.GenericClass`1"/> type as a cref attribute.
+            </remarks>
+        </member>
+    </members>
+</doc>
+```
+
+
+## Generic types
+
+- generics
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="TypeParamTags":::
+
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="TypeParamTags":::
+
 
 The following sample provides a basic overview of a type that has been documented.
 

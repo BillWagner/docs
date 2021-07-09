@@ -1,7 +1,7 @@
 ---
 title: "Recommended XML documentation tags for a class and its members"
 description: This article provides the syntax and definitions for recommended tags for XML documentation.
-ms.date: 06/16/2021
+ms.date: 07/12/2021
 f1_keywords:
   - "<summary>"
   - "summary"
@@ -36,8 +36,6 @@ f1_keywords:
   - "see"
   - "<seealso>"
   - "seealso"
-  - "permission"
-  - "<permission>"
 helpviewer_keywords:
   - "XML [C#], tags"
   - "XML documentation [C#], tags"
@@ -91,8 +89,6 @@ helpviewer_keywords:
   - "cref [C#]"
   - "cross-references [C#], tags"
   - "<seealso> C# XML tag"
-  - "<permission> C# XML tag"
-  - "permission C# XML tag"
 ---
 # Recommend XML tags for C# documentation comments
 
@@ -115,13 +111,22 @@ Some of the recommended tags can be used on any language element. Others have mo
             `<remarks>` \*\*
         :::column-end:::
     :::row-end:::
-- [Reuse documentation text](#reuse-documentation-text) - These tags provide tools that make it easier to reuse XML comments.
+- [Tags used for members](#document-members) - These tags are used when documenting methods and properties.
     :::row:::
         :::column:::
-            `<inheritdoc>` \*\*
+            `<returns>`
         :::column-end:::
         :::column:::
-            `<include>` \*
+            `<param>` \*
+        :::column-end:::
+        :::column:::
+            `<paramref>`
+        :::column-end:::
+        :::column:::
+            `<exception>` \*
+        :::column-end:::
+        :::column:::
+            `<value>`
         :::column-end:::
     :::row-end:::
 - [Format documentation output](#format-documentation-output) - These tags provide formatting directions for tools that generate documentation.
@@ -142,6 +147,15 @@ Some of the recommended tags can be used on any language element. Others have mo
             `<example>` \*\*
         :::column-end:::
     :::row-end:::
+- [Reuse documentation text](#reuse-documentation-text) - These tags provide tools that make it easier to reuse XML comments.
+    :::row:::
+        :::column:::
+            `<inheritdoc>` \*\*
+        :::column-end:::
+        :::column:::
+            `<include>` \*
+        :::column-end:::
+    :::row-end:::
 - [Generate links and references](#generate-links-and-references) - These tags generate links to other documentation.
     :::row:::
         :::column:::
@@ -155,27 +169,6 @@ Some of the recommended tags can be used on any language element. Others have mo
         :::column-end:::
         :::column:::
             `<href>`
-        :::column-end:::
-    :::row-end:::
-- [Tags used for methods](#document-methods) - These tags are used when documenting methods.
-    :::row:::
-        :::column:::
-            `<returns>`
-        :::column-end:::
-        :::column:::
-            `<param>` \*
-        :::column-end:::
-        :::column:::
-            `<paramref>`
-        :::column-end:::
-        :::column:::
-            `<exception>` \*
-        :::column-end:::
-    :::row-end:::
-- [Tags used for properties](#document-properties) - This tag is used only on C# properties.
-    :::row:::
-        :::column:::
-            `<value>`
         :::column-end:::
     :::row-end:::
 - [Tags for generic types and methods](#generic-types-and-methods) - These tags are used only on generic types and methods
@@ -211,78 +204,63 @@ If you want angle brackets to appear in the text of a documentation comment, use
 
 The `<summary>` tag should be used to describe a type or a type member. Use [\<remarks>](#remarks) to add supplemental information to a type description. Use the [cref Attribute](#cref-attribute) to enable documentation tools such as [DocFX](https://dotnet.github.io/docfx/) and [Sandcastle](https://github.com/EWSoftware/SHFB) to create internal hyperlinks to documentation pages for code elements. The text for the `<summary>` tag is the only source of information about the type in IntelliSense, and is also displayed in the Object Browser Window.
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="SummaryTag":::
-
 ### \<remarks>
 
 ```xml
-<remarks>description</remarks>
+<remarks>
+description
+</remarks>
 ```
 
 The `<remarks>` tag is used to add information about a type, supplementing the information specified with [\<summary>](#summary). This information is displayed in the Object Browser window.
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="RemarksTag":::
+## Document members
 
-## Reuse documentation text
-
-### \<inheritdoc>
-
-```xml  
-<inheritdoc [cref=""] [path=""]/>
-```  
-
-Inherit XML comments from base classes, interfaces, and similar methods. This eliminates unwanted copying and pasting of duplicate XML comments and automatically keeps XML comments synchronized.
-
-- `cref`:  Specify the member to inherit documentation from. Already defined tags on the current member are not overridden by the inherited ones.
-- `path`: The XPath expression query that will result in a node set to show. You can use this attribute to filter which tags to include or exclude from the inherited documentation.
-  
-Add your XML comments in base classes or interfaces and let InheritDoc copy the comments to implementing classes. Add your XML comments to your synchronous methods and let InheritDoc copy the comments to your asynchronous versions of the same methods. If you want to copy the comments from a specific member you can use the `cref` attribute to specify the member.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="InheritDocTag":::
-
-### \<include>
+### \<returns>
 
 ```xml
-<include file='filename' path='tagpath[@name="id"]' />
+<returns>description</returns>
 ```
 
-- `filename`: The name of the XML file containing the documentation. The file name can be qualified with a path relative to the source code file. Enclose `filename` in single quotation marks (' ').
-- `tagpath`: The path of the tags in `filename` that leads to the tag `name`. Enclose the path in single quotation marks (' ').
-- `name`: The name specifier in the tag that precedes the comments; `name` will have an `id`.
-- `id`: The ID for the tag that precedes the comments. Enclose the ID in double quotation marks (" ").
+The `<returns>` tag should be used in the comment for a method declaration to describe the return value.
 
-The `<include>` tag lets you refer to comments in another file that describe the types and members in your source code. This is an alternative to placing documentation comments directly in your source code file. By putting the documentation in a separate file, you can apply source control to the documentation separately from the source code. One person can have the source code file checked out and someone else can have the documentation file checked out. The `<include>` tag uses the XML XPath syntax. Refer to XPath documentation for ways to customize your `<include>` use.
-
-This is a multifile example. The following is the first file, which uses `<include>`.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="IncludeTag":::
-
-The second file, *xml_include_tag.xml*, contains the following documentation comments.
-
-:::code language="xml" source="./snippets/xmldoc/xml_include_tag.xml" :::
-
-The following output is generated when you compile the Test and Test2 classes with the following command line: `-doc:DocFileName.xml.` In Visual Studio, you specify the XML doc comments option in the Build pane of the Project Designer. When the C# compiler sees the `<include>` tag, it searches for documentation comments in *xml_include_tag.doc* instead of the current source file. The compiler then generates *DocFileName.xml*, and this is the file that is consumed by documentation tools such as [Sandcastle](https://github.com/EWSoftware/SHFB) to produce the final documentation.
+### \<param>
 
 ```xml
-<?xml version="1.0"?>
-<doc>
-    <assembly>
-        <name>xml_include_tag</name>
-    </assembly>
-    <members>
-        <member name="T:Test">
-            <summary>
-                The summary for this type.
-            </summary>
-        </member>
-        <member name="T:Test2">
-            <summary>
-                The summary for this other type.
-            </summary>
-        </member>
-    </members>
-</doc>
+<param name="name">description</param>
 ```
+
+- `name`: The name of a method parameter. Enclose the name in double quotation marks (" ").
+
+The `<param>` tag should be used in the comment for a method declaration to describe one of the parameters for the method. To document multiple parameters, use multiple `<param>` tags. The text for the `<param>` tag is displayed in IntelliSense, the Object Browser, and the Code Comment Web Report.
+
+### \<paramref>
+
+```xml
+<paramref name="name"/>
+```
+
+- `name`: The name of the parameter to refer to. Enclose the name in double quotation marks (" ").
+
+The `<paramref>` tag gives you a way to indicate that a word in the code comments, for example in a `<summary>` or `<remarks>` block refers to a parameter. The XML file can be processed to format this word in some distinct way, such as with a bold or italic font.
+
+### \<exception>
+
+```xml
+<exception cref="member">description</exception>
+```
+
+- cref = " `member`": A reference to an exception that is available from the current compilation environment. The compiler checks that the given exception exists and translates `member` to the canonical element name in the output XML. `member` must appear within double quotation marks (" ").
+
+The `<exception>` tag lets you specify which exceptions can be thrown. This tag can be applied to definitions for methods, properties, events, and indexers.
+
+### \<value>
+
+```xml
+<value>property-description</value>
+```
+
+The `<value>` tag lets you describe the value that a property represents. When you add a property via code wizard in the Visual Studio .NET development environment, it adds a [\<summary>](#summary) tag for the new property. You should then manually add a `<value>` tag to describe the value that the property represents.
 
 ## Format documentation output
 
@@ -311,8 +289,6 @@ The `<para>` tag is for use inside a tag, such as [\<summary>](#summary), [\<rem
 
 The `<listheader>` block is used to define the heading row of either a table or definition list. When defining a table, you only need to supply an entry for term in the heading. Each item in the list is specified with an `<item>` block. When creating a definition list, you will need to specify both `term` and `description`. However, for a table, bulleted list, or numbered list, you only need to supply an entry for `description`. A list or table can have as many `<item>` blocks as needed.
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ListTag":::
-
 ### \<c>
 
 ```xml
@@ -321,8 +297,6 @@ The `<listheader>` block is used to define the heading row of either a table or 
 
 The `<c>` tag gives you a way to indicate that text within a description should be marked as code. Use [\<code>](#code) to indicate multiple lines as code.
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="cTag":::
-  
 ### \<code>
 
 ```xml
@@ -339,7 +313,33 @@ The `<code>` tag is used to indicate multiple lines of code. Use [\<c>](#c) to i
 
 The `<example>` tag lets you specify an example of how to use a method or other library member. This commonly involves using the [\<code>](#code) tag.
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExampleTag":::
+## Reuse documentation text
+
+### \<inheritdoc>
+
+```xml  
+<inheritdoc [cref=""] [path=""]/>
+```  
+
+Inherit XML comments from base classes, interfaces, and similar methods. This eliminates unwanted copying and pasting of duplicate XML comments and automatically keeps XML comments synchronized.
+
+- `cref`:  Specify the member to inherit documentation from. Already defined tags on the current member are not overridden by the inherited ones.
+- `path`: The XPath expression query that will result in a node set to show. You can use this attribute to filter which tags to include or exclude from the inherited documentation.
+  
+Add your XML comments in base classes or interfaces and let InheritDoc copy the comments to implementing classes. Add your XML comments to your synchronous methods and let InheritDoc copy the comments to your asynchronous versions of the same methods. If you want to copy the comments from a specific member you can use the `cref` attribute to specify the member.
+
+### \<include>
+
+```xml
+<include file='filename' path='tagpath[@name="id"]' />
+```
+
+- `filename`: The name of the XML file containing the documentation. The file name can be qualified with a path relative to the source code file. Enclose `filename` in single quotation marks (' ').
+- `tagpath`: The path of the tags in `filename` that leads to the tag `name`. Enclose the path in single quotation marks (' ').
+- `name`: The name specifier in the tag that precedes the comments; `name` will have an `id`.
+- `id`: The ID for the tag that precedes the comments. Enclose the ID in double quotation marks (" ").
+
+The `<include>` tag lets you refer to comments in another file that describe the types and members in your source code. This is an alternative to placing documentation comments directly in your source code file. By putting the documentation in a separate file, you can apply source control to the documentation separately from the source code. One person can have the source code file checked out and someone else can have the documentation file checked out. The `<include>` tag uses the XML XPath syntax. Refer to XPath documentation for ways to customize your `<include>` use.
 
 ## Generate links and references
 
@@ -358,8 +358,6 @@ The `<example>` tag lets you specify an example of how to use a method or other 
 - `langword="keyword"`: A language keyword, such as `true`.
 
 The `<see>` tag lets you specify a link from within text. Use [\<seealso>](#seealso) to indicate that text should be placed in a See Also section. Use the [cref Attribute](#cref-attribute) to create internal hyperlinks to documentation pages for code elements. Also, ``href`` is a valid Attribute that will function as a hyperlink. The following example shows a `<see>` tag within a summary section.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="SeeExample":::
 
 ### \<seealso>
 
@@ -380,130 +378,7 @@ The `cref` attribute in an XML documentation tag means "code reference." It spec
 
 The following example shows `cref` attributes used in [\<see>](#see) tags.
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="CRefTags":::
-
-When compiled into an assembly named *CRefTest.dll*, the program produces the following XML file. Notice that the `cref` attribute for the `GetZero` method, for example, has been transformed by the compiler to `"M:TestNamespace.TestClass.GetZero"`. The "M:" prefix means "method" and is a convention that is recognized by documentation tools such as DocFX and Sandcastle.
-
-```xml  
-<?xml version="1.0"?>
-<doc>
-    <assembly>
-        <name>CRefTest</name>
-    </assembly>
-    <members>
-        <member name="T:TestNamespace.TestClass">
-            <summary>
-            TestClass contains several cref examples.
-            </summary>
-        </member>
-        <member name="M:TestNamespace.TestClass.#ctor">
-            <summary>
-            This sample shows how to specify the <see cref="T:TestNamespace.TestClass"/> constructor as a cref attribute.
-            </summary>
-        </member>
-        <member name="M:TestNamespace.TestClass.#ctor(System.Int32)">
-            <summary>
-            This sample shows how to specify the <see cref="M:TestNamespace.TestClass.#ctor(System.Int32)"/> constructor as a cref attribute.
-            </summary>
-        </member>
-        <member name="M:TestNamespace.TestClass.GetZero">
-            <summary>
-            The GetZero method.
-            </summary>
-            <example>
-            This sample shows how to call the <see cref="M:TestNamespace.TestClass.GetZero"/> method.
-            <code>
-            class TestClass
-            {
-                static int Main()
-                {
-                    return GetZero();
-                }
-            }
-            </code>
-            </example>
-        </member>
-        <member name="M:TestNamespace.TestClass.GetGenericValue``1(``0)">
-            <summary>
-            The GetGenericValue method.
-            </summary>
-            <remarks>
-            This sample shows how to specify the <see cref="M:TestNamespace.TestClass.GetGenericValue``1(``0)"/> method as a cref attribute.
-            </remarks>
-        </member>
-        <member name="T:TestNamespace.GenericClass`1">
-            <summary>
-            GenericClass.
-            </summary>
-            <remarks>
-            This example shows how to specify the <see cref="T:TestNamespace.GenericClass`1"/> type as a cref attribute.
-            </remarks>
-        </member>
-    </members>
-</doc>
-```
-
 ### href
-
-## Document methods
-
-### \<returns>
-
-```xml
-<returns>description</returns>
-```
-
-The `<returns>` tag should be used in the comment for a method declaration to describe the return value.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ReturnsTag":::
-
-### \<param>
-
-```xml
-<param name="name">description</param>
-```
-
-- `name`: The name of a method parameter. Enclose the name in double quotation marks (" ").
-
-The `<param>` tag should be used in the comment for a method declaration to describe one of the parameters for the method. To document multiple parameters, use multiple `<param>` tags. The text for the `<param>` tag is displayed in IntelliSense, the Object Browser, and the Code Comment Web Report.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ParamTag":::
-
-### \<paramref>
-
-```xml
-<paramref name="name"/>
-```
-
-- `name`: The name of the parameter to refer to. Enclose the name in double quotation marks (" ").
-
-The `<paramref>` tag gives you a way to indicate that a word in the code comments, for example in a `<summary>` or `<remarks>` block refers to a parameter. The XML file can be processed to format this word in some distinct way, such as with a bold or italic font.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ParamRefTag":::
-
-## \<exception>
-
-```xml
-<exception cref="member">description</exception>
-```
-
-- cref = " `member`": A reference to an exception that is available from the current compilation environment. The compiler checks that the given exception exists and translates `member` to the canonical element name in the output XML. `member` must appear within double quotation marks (" ").
-
-The `<exception>` tag lets you specify which exceptions can be thrown. This tag can be applied to definitions for methods, properties, events, and indexers.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExceptionTag":::
-
-## Document properties
-
-### \<value>
-
-```xml
-<value>property-description</value>
-```
-
-The `<value>` tag lets you describe the value that a property represents. When you add a property via code wizard in the Visual Studio .NET development environment, it adds a [\<summary>](#summary) tag for the new property. You should then manually add a `<value>` tag to describe the value that the property represents.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ValueTag":::
 
 ## Generic types and methods
 
@@ -517,8 +392,6 @@ The `<value>` tag lets you describe the value that a property represents. When y
 
 The `<typeparam>` tag should be used in the comment for a generic type or method declaration to describe a type parameter. Add a tag for each type parameter of the generic type or method. The text for the `<typeparam>` tag will be displayed in IntelliSense, the [Object Browser Window](/visualstudio/ide/viewing-the-structure-of-code#BKMK_ObjectBrowser) code comment web report.
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="TypeParamTags":::
-
 ### \<typeparamref>
 
 ```xml
@@ -528,5 +401,3 @@ The `<typeparam>` tag should be used in the comment for a generic type or method
 - `name`: The name of the type parameter. Enclose the name in double quotation marks (" ").
 
 Use this tag to enable consumers of the documentation file to format the word in some distinct way, for example in italics.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="TypeParamTags":::
