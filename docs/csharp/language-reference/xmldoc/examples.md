@@ -1,350 +1,38 @@
 ---
-title: "How to use the XML documentation features - C# programming guide"
-description: Learn how to use XML documentation features. See code examples and view additional available resources.
-ms.date: 07/12/2021
+title: "Example XML documentation comments"
+description: See examples on many different C# language elements. Learn which tags to use in different situations and for different language elements.
+ms.date: 07/14/2021
 ms.topic: how-to
 ---
-# How to use the XML documentation features
+# Example XML documentation comments
 
-## Document a class
+This article contains examples for adding XML documentation comments to most C# language elements. This article contains three sets of examples. The first shows how you document a class with different members. The second shows how you would reuse explanations for a hierarchy of classes or interfaces. The third shows how tags you'll use for generic classes and members. The second and third examples use concepts that are covered in the first example.
 
-- general
+## Document a class, struct, or interface
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="SummaryTag":::
+The following example shows common language elements, and the tags you'll likely use to describe these elements.  The documentation comments describe the use of the tags, rather than the class itself.
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="RemarksTag":::
-
-- methods
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ReturnsTag":::
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ParamTag":::
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ParamRefTag":::
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExceptionTag":::
-
-- properties
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ValueTag":::
-
-- format output
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ListTag":::
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="cTag":::
-  
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ExampleTag":::
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="ClassExample":::
 
 ## Document a hierarchy of classes and interfaces
 
-- inheritdoc
+The `<InheritDoc>` element means a type or member *inherits* documentation comments from a base class or interface. You can also use the `<InheritDoc>` element with the `cref` attribute to inherit comments from a member of the same type. The following example shows ways to use this tag:
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="InheritDocTag":::
 
-This is a multifile example. The following is the first file, which uses `<include>`.
+You use the `<Include>` tag to separate your XML comments from your source. Your source code references an XML file with the `<Include>` tag:
 
 :::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="IncludeTag":::
 
-The second file, *xml_include_tag.xml*, contains the following documentation comments.
+The second file, *xml_include_tag.xml*, contains the documentation comments.
 
 :::code language="xml" source="./snippets/xmldoc/xml_include_tag.xml" :::
 
-The following output is generated when you compile the Test and Test2 classes with the following command line: `-doc:DocFileName.xml.` In Visual Studio, you specify the XML doc comments option in the Build pane of the Project Designer. When the C# compiler sees the `<include>` tag, it searches for documentation comments in *xml_include_tag.doc* instead of the current source file. The compiler then generates *DocFileName.xml*, and this is the file that is consumed by documentation tools such as [Sandcastle](https://github.com/EWSoftware/SHFB) to produce the final documentation.
-
-```xml
-<?xml version="1.0"?>
-<doc>
-    <assembly>
-        <name>xml_include_tag</name>
-    </assembly>
-    <members>
-        <member name="T:Test">
-            <summary>
-                The summary for this type.
-            </summary>
-        </member>
-        <member name="T:Test2">
-            <summary>
-                The summary for this other type.
-            </summary>
-        </member>
-    </members>
-</doc>
-```
-
-- links and references
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="SeeExample":::
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="CRefTags":::
-
-When compiled into an assembly named *CRefTest.dll*, the program produces the following XML file. Notice that the `cref` attribute for the `GetZero` method, for example, has been transformed by the compiler to `"M:TestNamespace.TestClass.GetZero"`. The "M:" prefix means "method" and is a convention that is recognized by documentation tools such as DocFX and Sandcastle.
-
-```xml  
-<?xml version="1.0"?>
-<doc>
-    <assembly>
-        <name>CRefTest</name>
-    </assembly>
-    <members>
-        <member name="T:TestNamespace.TestClass">
-            <summary>
-            TestClass contains several cref examples.
-            </summary>
-        </member>
-        <member name="M:TestNamespace.TestClass.#ctor">
-            <summary>
-            This sample shows how to specify the <see cref="T:TestNamespace.TestClass"/> constructor as a cref attribute.
-            </summary>
-        </member>
-        <member name="M:TestNamespace.TestClass.#ctor(System.Int32)">
-            <summary>
-            This sample shows how to specify the <see cref="M:TestNamespace.TestClass.#ctor(System.Int32)"/> constructor as a cref attribute.
-            </summary>
-        </member>
-        <member name="M:TestNamespace.TestClass.GetZero">
-            <summary>
-            The GetZero method.
-            </summary>
-            <example>
-            This sample shows how to call the <see cref="M:TestNamespace.TestClass.GetZero"/> method.
-            <code>
-            class TestClass
-            {
-                static int Main()
-                {
-                    return GetZero();
-                }
-            }
-            </code>
-            </example>
-        </member>
-        <member name="M:TestNamespace.TestClass.GetGenericValue``1(``0)">
-            <summary>
-            The GetGenericValue method.
-            </summary>
-            <remarks>
-            This sample shows how to specify the <see cref="M:TestNamespace.TestClass.GetGenericValue``1(``0)"/> method as a cref attribute.
-            </remarks>
-        </member>
-        <member name="T:TestNamespace.GenericClass`1">
-            <summary>
-            GenericClass.
-            </summary>
-            <remarks>
-            This example shows how to specify the <see cref="T:TestNamespace.GenericClass`1"/> type as a cref attribute.
-            </remarks>
-        </member>
-    </members>
-</doc>
-```
-
-
 ## Generic types
 
-- generics
+Generic types and methods will use the `<TypeParam>` tag to describe type paramaeters. Also, the value for the `cref` attribute requires new syntax to reference a generic method or class:
 
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="TypeParamTags":::
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="TypeParamTags":::
-
-
-The following sample provides a basic overview of a type that has been documented.
-
-## Example
-
-```csharp
-// If compiling from the command line, compile with: -doc:YourFileName.xml
-
-/// <summary>
-/// Class level summary documentation goes here.
-/// </summary>
-/// <remarks>
-/// Longer comments can be associated with a type or member through
-/// the remarks tag.
-/// </remarks>
-public class TestClass : TestInterface
-{
-    /// <summary>
-    /// Store for the Name property.
-    /// </summary>
-    private string _name = null;
-
-    /// <summary>
-    /// The class constructor.
-    /// </summary>
-    public TestClass()
-    {
-        // TODO: Add Constructor Logic here.
-    }
-
-    /// <summary>
-    /// Name property.
-    /// </summary>
-    /// <value>
-    /// A value tag is used to describe the property value.
-    /// </value>
-    public string Name
-    {
-        get
-        {
-            if (_name == null)
-            {
-                throw new System.Exception("Name is null");
-            }
-            return _name;
-        }
-    }
-
-    /// <summary>
-    /// Description for SomeMethod.
-    /// </summary>
-    /// <param name="s"> Parameter description for s goes here.</param>
-    /// <seealso cref="System.String">
-    /// You can use the cref attribute on any tag to reference a type or member
-    /// and the compiler will check that the reference exists.
-    /// </seealso>
-    public void SomeMethod(string s)
-    {
-    }
-
-    /// <summary>
-    /// Some other method.
-    /// </summary>
-    /// <returns>
-    /// Return values are described through the returns tag.
-    /// </returns>
-    /// <seealso cref="SomeMethod(string)">
-    /// Notice the use of the cref attribute to reference a specific method.
-    /// </seealso>
-    public int SomeOtherMethod()
-    {
-        return 0;
-    }
-
-    public int InterfaceMethod(int n)
-    {
-        return n * n;
-    }
-
-    /// <summary>
-    /// The entry point for the application.
-    /// </summary>
-    /// <param name="args"> A list of command line arguments.</param>
-    static int Main(System.String[] args)
-    {
-        // TODO: Add code to start application here.
-        return 0;
-    }
-}
-
-/// <summary>
-/// Documentation that describes the interface goes here.
-/// </summary>
-/// <remarks>
-/// Details about the interface go here.
-/// </remarks>
-interface TestInterface
-{
-    /// <summary>
-    /// Documentation that describes the method goes here.
-    /// </summary>
-    /// <param name="n">
-    /// Parameter n requires an integer argument.
-    /// </param>
-    /// <returns>
-    /// The method returns an integer.
-    /// </returns>
-    int InterfaceMethod(int n);
-}
-```
-
-The example generates an *.xml* file with the following contents.
-
-```xml
-<?xml version="1.0"?>
-<doc>
-    <assembly>
-        <name>xmlsample</name>
-    </assembly>
-    <members>
-        <member name="T:TestClass">
-            <summary>
-            Class level summary documentation goes here.
-            </summary>
-            <remarks>
-            Longer comments can be associated with a type or member through
-            the remarks tag.
-            </remarks>
-        </member>
-        <member name="F:TestClass._name">
-            <summary>
-            Store for the Name property.
-            </summary>
-        </member>
-        <member name="M:TestClass.#ctor">
-            <summary>
-            The class constructor.
-            </summary>
-        </member>
-        <member name="P:TestClass.Name">
-            <summary>
-            Name property.
-            </summary>
-            <value>
-            A value tag is used to describe the property value.
-            </value>
-        </member>
-        <member name="M:TestClass.SomeMethod(System.String)">
-            <summary>
-            Description for SomeMethod.
-            </summary>
-            <param name="s"> Parameter description for s goes here.</param>
-            <seealso cref="T:System.String">
-            You can use the cref attribute on any tag to reference a type or member
-            and the compiler will check that the reference exists.
-            </seealso>
-        </member>
-        <member name="M:TestClass.SomeOtherMethod">
-            <summary>
-            Some other method.
-            </summary>
-            <returns>
-            Return values are described through the returns tag.
-            </returns>
-            <seealso cref="M:TestClass.SomeMethod(System.String)">
-            Notice the use of the cref attribute to reference a specific method.
-            </seealso>
-        </member>
-        <member name="M:TestClass.Main(System.String[])">
-            <summary>
-            The entry point for the application.
-            </summary>
-            <param name="args"> A list of command line arguments.</param>
-        </member>
-        <member name="T:TestInterface">
-            <summary>
-            Documentation that describes the interface goes here.
-            </summary>
-            <remarks>
-            Details about the interface go here.
-            </remarks>
-        </member>
-        <member name="M:TestInterface.InterfaceMethod(System.Int32)">
-            <summary>
-            Documentation that describes the method goes here.
-            </summary>
-            <param name="n">
-            Parameter n requires an integer argument.
-            </param>
-            <returns>
-            The method returns an integer.
-            </returns>
-        </member>
-    </members>
-</doc>
-```
+:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="GenericExample":::
 
 ## Robust programming
 
@@ -538,16 +226,3 @@ All the tags outlined above represent those that are recognized by the C# compil
 Tools like Sandcastle bring support for extra tags like [\<event>](https://ewsoftware.github.io/XMLCommentsGuide/html/81bf7ad3-45dc-452f-90d5-87ce2494a182.htm) and [\<note>](https://ewsoftware.github.io/XMLCommentsGuide/html/4302a60f-e4f4-4b8d-a451-5f453c4ebd46.htm),
 and even support [documenting namespaces](https://ewsoftware.github.io/XMLCommentsGuide/html/BD91FAD4-188D-4697-A654-7C07FD47EF31.htm).
 Custom or in-house documentation generation tools can also be used with the standard tags and multiple output formats from HTML to PDF can be supported.
-
-## \<permission>
-
-```xml
-<permission cref="member">description</permission>
-```
-
-- cref = " `member`": A reference to a member or field that is available to be called from the current compilation environment. The compiler checks that the given code element exists and translates `member` to the canonical element name in the output XML. *member* must appear within double quotation marks (" ").
-- `description`: A description of the access to the member.
-
-The `<permission>` tag lets you document the access of a member. The <xref:System.Security.PermissionSet> class lets you specify access to a member.
-
-:::code language="csharp" source="./snippets/xmldoc/DocComments.cs" ID="PermissionTag":::
