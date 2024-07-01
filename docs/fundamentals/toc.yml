@@ -30,7 +30,7 @@ items:
               - name: Alpine
                 href: ../core/install/linux-alpine.md
               - name: CentOS
-                href: ../core/install/linux-centos.md
+                href: /dotnet/core/install/linux-rhel#where-is-centos-linux
               - name: CentOS Stream
                 href: ../core/install/linux-rhel.md#supported-distributions
               - name: Debian
