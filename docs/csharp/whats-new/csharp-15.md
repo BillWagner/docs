@@ -67,7 +67,7 @@ string name = pet switch
 };
 ```
 
-Union types first appear in .NET 11 preview 2. In early .NET 11 previews, the `UnionAttribute` and `IUnion` interface aren't included in the runtime, so you must declare them in your project. A later .NET 11 preview will include these runtime types.
+Union types first appear in .NET 11 preview 2. In early .NET 11 previews, the `UnionAttribute` and `IUnion` interface aren't included in the runtime, so you must declare them in your project. A later .NET 11 preview will include these runtime types. Also, some features from the [proposal specification](~/_csharplang/proposals/unions.md) aren't yet implemented, including *union member providers*. Those features will be coming in future previews.
 
 For more information, see [Union types](../language-reference/builtin-types/union.md) in the language reference or the [feature specification](~/_csharplang/proposals/unions.md).
 
