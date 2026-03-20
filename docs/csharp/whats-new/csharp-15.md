@@ -1,23 +1,23 @@
 ---
 title: What's new in C# 15
 description: Get an overview of the new features in C# 15. C# 15 ships with .NET 11.
-ms.date: 02/04/2026
+ms.date: 03/20/2026
 ms.topic: whats-new
 ms.update-cycle: 365-days
 ai-usage: ai-assisted
 ---
 # What's new in C# 15
 
-C# 15 includes the following new features. You can try these features using the latest [Visual Studio 2026](https://visualstudio.microsoft.com/) version or the [.NET 11 preview SDK](https://dotnet.microsoft.com/download/dotnet):
+C# 15 includes the following new features. Try these features by using the latest [Visual Studio 2026](https://visualstudio.microsoft.com/) insiders version or the [.NET 11 preview SDK](https://dotnet.microsoft.com/download/dotnet):
 
 - [Collection expression arguments](#collection-expression-arguments)
 - [Union types](#union-types)
 
-C# 15 is the latest C# release. C# 15 is supported on **.NET 11**. For more information, see [C# language versioning](../language-reference/configure-language-version.md).
+C# 15 is the latest preview C# release. **.NET 11** previews supports C# 15. For more information, see [C# language versioning](../language-reference/configure-language-version.md).
 
 You can download the latest .NET 11 preview SDK from the [.NET downloads page](https://dotnet.microsoft.com/download). You can also download [Visual Studio 2026 insiders](https://visualstudio.microsoft.com/vs/), which includes the .NET 11 preview SDK.
 
-New features are added to the "What's new in C#" page when they're available in public preview releases. The [working set](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md#working-set) section of the [roslyn feature status page](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md) tracks when upcoming features are merged into the main branch.
+The "What's new in C#" page adds new features when they're available in public preview releases. The [working set](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md#working-set) section of the [roslyn feature status page](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md) tracks when upcoming features are merged into the main branch.
 
 You can find any breaking changes introduced in C# 15 in our article on [breaking changes](~/_roslyn/docs/compilers/CSharp/Compiler%20Breaking%20Changes%20-%20DotNet%2011.md).
 
@@ -40,7 +40,7 @@ HashSet<string> set = [with(StringComparer.OrdinalIgnoreCase), "Hello", "HELLO",
 // set contains only one element because all strings are equal with OrdinalIgnoreCase
 ```
 
-You can learn more about collection expression arguments in the [language reference article on collection expressions](../language-reference/operators/collection-expressions.md#collection-expression-arguments) or the [feature specification](~/_csharplang/proposals/collection-expression-arguments.md). For information on using collection expression arguments in collection initializers, see [Object and Collection Initializers](../programming-guide/classes-and-structs/object-and-collection-initializers.md#collection-expression-arguments).
+To learn more about collection expression arguments, see the [language reference article on collection expressions](../language-reference/operators/collection-expressions.md#collection-expression-arguments) or the [feature specification](~/_csharplang/proposals/collection-expression-arguments.md). For information on using collection expression arguments in collection initializers, see [Object and Collection Initializers](../programming-guide/classes-and-structs/object-and-collection-initializers.md#collection-expression-arguments).
 
 ## Union types
 
@@ -67,7 +67,7 @@ string name = pet switch
 };
 ```
 
-Union types first appeared in .NET 10 Preview 2. However, the `UnionAttribute` and `IUnion` interface aren't included in the .NET 10 Preview 2 runtime—you must declare them in your project. They'll be included in a future preview.
+Union types first appeared in .NET 10 Preview 2. However, the `UnionAttribute` and `IUnion` interface aren't included in the .NET 10 Preview 2 runtime. You must declare them in your project. They'll be included in a future preview.
 
 For more information, see [Union types](../language-reference/builtin-types/union.md) in the language reference or the [feature specification](~/_csharplang/proposals/unions.md).
 
