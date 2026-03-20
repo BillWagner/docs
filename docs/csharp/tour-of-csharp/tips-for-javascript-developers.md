@@ -108,7 +108,7 @@ Some familiar features and idioms from JavaScript and TypeScript aren't availabl
 
 In addition, a few more TypeScript features aren't available in C#:
 
-1. ***Union types***: C# doesn't support union types. However, design proposals are in progress.
+1. ***Union types***: Beginning with C# 15, C# supports [union types](../language-reference/builtin-types/union.md). A union defines a closed set of named cases that a value can represent, and the compiler ensures exhaustive pattern matching over those cases.
 1. ***Decorators***: C# doesn't have decorators. Some common decorators, such as `@sealed` are reserved keywords in C#. Other common decorators might have corresponding [Attributes](../language-reference/attributes/general.md). For other decorators, you can create your own attributes.
 1. ***More forgiving syntax***: The C# compiler parses code more strictly than JavaScript requires.
 
