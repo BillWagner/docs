@@ -1,7 +1,7 @@
 ---
 title: "switch expression - Evaluate a pattern match expression using the `switch` expression"
 description: Learn about the C# `switch` expression that provides switch-like semantics based on pattern matching. You can compute a value based on which pattern an input variable matches.
-ms.date: 01/20/2026
+ms.date: 03/20/2026
 f1_keywords:
   - "switch-expression_CSharpKeyword"
 helpviewer_keywords:
@@ -43,7 +43,7 @@ A pattern might not be expressive enough to specify the condition for the evalua
 
 The preceding example uses [property patterns](patterns.md#property-pattern) with nested [var patterns](patterns.md#var-pattern).
 
-## Non-exhaustive switch expressions
+## Nonexhaustive switch expressions
 
 If none of a `switch` expression's patterns matches an input value, the runtime throws an exception. In .NET Core 3.0 and later versions, the exception is a <xref:System.Runtime.CompilerServices.SwitchExpressionException?displayProperty=nameWithType>. In .NET Framework, the exception is an <xref:System.InvalidOperationException>. In most cases, the compiler generates a warning if a `switch` expression doesn't handle all possible input values. [List patterns](patterns.md#list-patterns) don't generate a warning when all possible inputs aren't handled.
 
