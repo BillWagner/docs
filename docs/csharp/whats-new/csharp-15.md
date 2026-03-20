@@ -13,7 +13,7 @@ C# 15 includes the following new features. Try these features by using the lates
 - [Collection expression arguments](#collection-expression-arguments)
 - [Union types](#union-types)
 
-C# 15 is the latest preview C# release. **.NET 11** previews supports C# 15. For more information, see [C# language versioning](../language-reference/configure-language-version.md).
+C# 15 is the latest C# preview release. .NET 11 previews support C# 15. For more information, see [C# language versioning](../language-reference/configure-language-version.md).
 
 You can download the latest .NET 11 preview SDK from the [.NET downloads page](https://dotnet.microsoft.com/download). You can also download [Visual Studio 2026 insiders](https://visualstudio.microsoft.com/vs/), which includes the .NET 11 preview SDK.
 
@@ -67,7 +67,7 @@ string name = pet switch
 };
 ```
 
-Union types first appeared in .NET 10 Preview 2. However, the `UnionAttribute` and `IUnion` interface aren't included in the .NET 10 Preview 2 runtime. You must declare them in your project. They'll be included in a future preview.
+Union types first appear in .NET 11 preview 2. In early .NET 11 previews, the `UnionAttribute` and `IUnion` interface aren't included in the runtime, so you must declare them in your project. A later .NET 11 preview will include these runtime types.
 
 For more information, see [Union types](../language-reference/builtin-types/union.md) in the language reference or the [feature specification](~/_csharplang/proposals/unions.md).
 
