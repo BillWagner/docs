@@ -142,14 +142,14 @@ Any class or struct with a `[Union]` attribute is a *union type* if it follows t
 
 All union members must be public. The compiler uses these members to implement union conversions, pattern matching, and exhaustiveness checks. You can also implement the [Non-boxing access pattern](#non-boxing-access-pattern) or create a [class-based union type](#class-based-union-types).
 
-The compiler assumes that manual union types satisfy these behavioral rules:
+The compiler assumes that custom union types satisfy these behavioral rules:
 
 - **Soundness**: `Value` always returns `null` or a value of one of the case types - never a value of a different type. For struct unions, `default` produces a `Value` of `null`.
 - **Stability**: If you create a union value from a case type, `Value` matches that case type (or is `null` if the input was `null`).
 - **Creation equivalence**: If a value is implicitly convertible to two different case types, both creation members produce the same observable behavior.
 - **Access pattern consistency**: The `HasValue` and `TryGetValue` members, if present, behave equivalently to checking `Value` directly.
 
-The following example shows a manually declared union type:
+The following example shows a custom union type:
 
 :::code language="csharp" source="snippets/unions/ManualUnion.cs" id="ManualBasicPattern":::
 
@@ -157,7 +157,7 @@ The following example shows a manually declared union type:
 
 ### Non-boxing access pattern
 
-A manual union type can optionally implement the *non-boxing access pattern* to enable strongly typed access to value-type cases without boxing during pattern matching. This pattern requires:
+A custom union type can optionally implement the *non-boxing access pattern* to enable strongly typed access to value-type cases without boxing during pattern matching. This pattern requires:
 
 - A `HasValue` property of type `bool` that returns `true` when `Value` isn't `null`.
 - A `TryGetValue` method for each case type that returns `bool` and delivers the value through an `out` parameter.

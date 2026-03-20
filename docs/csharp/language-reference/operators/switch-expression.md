@@ -26,7 +26,7 @@ The preceding example shows the basic elements of a `switch` expression:
 In the preceding example, a `switch` expression uses the following patterns:
 
 - A [constant pattern](patterns.md#constant-pattern): to handle the defined values of the `Direction` enumeration.
-- A [discard pattern](patterns.md#discard-pattern): to handle any integer value that doesn't have the corresponding member of the `Direction` enumeration (for example, `(Direction)10`). That pattern makes the `switch` expression [exhaustive](#non-exhaustive-switch-expressions).
+- A [discard pattern](patterns.md#discard-pattern): to handle any integer value that doesn't have the corresponding member of the `Direction` enumeration (for example, `(Direction)10`). That pattern makes the `switch` expression [exhaustive](#nonexhaustive-switch-expressions).
 
 > [!IMPORTANT]
 > For information about the patterns supported by the `switch` expression and more examples, see [Patterns](patterns.md).

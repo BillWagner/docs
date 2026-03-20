@@ -1,5 +1,5 @@
 // Remove this file when UnionAttribute and IUnion are included in the .NET runtime.
-// <snippet_RuntimePolyfill>
+// <RuntimePolyfill>
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false)]
@@ -10,4 +10,4 @@ namespace System.Runtime.CompilerServices
         object? Value { get; }
     }
 }
-// </snippet_RuntimePolyfill>
+// </RuntimePolyfill>
