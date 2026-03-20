@@ -11,6 +11,7 @@ ai-usage: ai-assisted
 C# 15 includes the following new features. You can try these features using the latest [Visual Studio 2026](https://visualstudio.microsoft.com/) version or the [.NET 11 preview SDK](https://dotnet.microsoft.com/download/dotnet):
 
 - [Collection expression arguments](#collection-expression-arguments)
+- [Union types](#union-types)
 
 C# 15 is the latest C# release. C# 15 is supported on **.NET 11**. For more information, see [C# language versioning](../language-reference/configure-language-version.md).
 
@@ -40,6 +41,35 @@ HashSet<string> set = [with(StringComparer.OrdinalIgnoreCase), "Hello", "HELLO",
 ```
 
 You can learn more about collection expression arguments in the [language reference article on collection expressions](../language-reference/operators/collection-expressions.md#collection-expression-arguments) or the [feature specification](~/_csharplang/proposals/collection-expression-arguments.md). For information on using collection expression arguments in collection initializers, see [Object and Collection Initializers](../programming-guide/classes-and-structs/object-and-collection-initializers.md#collection-expression-arguments).
+
+## Union types
+
+C# 15 introduces *union types*, which represent a value that can be one of several *case types*. Declare a union with the `union` keyword:
+
+```csharp
+public record class Cat(string Name);
+public record class Dog(string Name);
+public record class Bird(string Name);
+
+public union Pet(Cat, Dog, Bird);
+```
+
+Unions provide implicit conversions from each case type, and the compiler ensures `switch` expressions are exhaustive across all case types:
+
+```csharp
+Pet pet = new Dog("Rex");
+
+string name = pet switch
+{
+    Dog d => d.Name,
+    Cat c => c.Name,
+    Bird b => b.Name,
+};
+```
+
+Union types first appeared in .NET 10 Preview 2. However, the `UnionAttribute` and `IUnion` interface aren't included in the .NET 10 Preview 2 runtime—you must declare them in your project. They'll be included in a future preview.
+
+For more information, see [Union types](../language-reference/builtin-types/union.md) in the language reference or the [feature specification](~/_csharplang/proposals/unions.md).
 
 <!-- Add when available
 ## See also

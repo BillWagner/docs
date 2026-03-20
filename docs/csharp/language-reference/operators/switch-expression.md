@@ -47,6 +47,8 @@ The preceding example uses [property patterns](patterns.md#property-pattern) wit
 
 If none of a `switch` expression's patterns matches an input value, the runtime throws an exception. In .NET Core 3.0 and later versions, the exception is a <xref:System.Runtime.CompilerServices.SwitchExpressionException?displayProperty=nameWithType>. In .NET Framework, the exception is an <xref:System.InvalidOperationException>. In most cases, the compiler generates a warning if a `switch` expression doesn't handle all possible input values. [List patterns](patterns.md#list-patterns) don't generate a warning when all possible inputs aren't handled.
 
+For [union types](../builtin-types/union.md), a `switch` expression is exhaustive when it handles all case types. A catch-all arm isn't needed. If the null state of the union's `Value` property is "maybe null," you must also handle `null` to avoid a warning. For more information, see [Union exhaustiveness](../builtin-types/union.md#union-exhaustiveness).
+
 > [!TIP]
 > To guarantee that a `switch` expression handles all possible input values, provide a `switch` expression arm with a [discard pattern](patterns.md#discard-pattern).
 

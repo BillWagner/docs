@@ -300,6 +300,30 @@ You can also nest a subpattern within a slice pattern, as the following example 
 
 For more information, see the [List patterns](~/_csharplang/proposals/csharp-11.0/list-patterns.md) feature proposal note.
 
+## Union patterns
+
+Beginning with C# 15, when the incoming value of a pattern is a [union type](../builtin-types/union.md), patterns automatically *unwrap* the union—they apply to the union's `Value` property rather than the union value itself. This means the union is transparent to pattern matching:
+
+```csharp
+public record class Cat(string Name);
+public record class Dog(string Name);
+public union Pet(Cat, Dog);
+
+string Describe(Pet pet) => pet switch
+{
+    Dog d => d.Name,
+    Cat c => c.Name,
+};
+```
+
+Two patterns are exceptions: the `var` pattern and the discard `_` pattern apply to the union value itself, not its `Value` property.
+
+The `null` pattern checks whether the union's `Value` is null. For class-based unions, `null` also succeeds when the union reference itself is null.
+
+When a union type provides the *non-boxing access pattern* (`HasValue` and `TryGetValue` members), the compiler uses those members to avoid boxing value-type cases during pattern matching.
+
+For more information, see the [Union matching](../builtin-types/union.md#union-matching) section. For the specification, see [Unions](~/_csharplang/proposals/unions.md).
+
 ## C# language specification
 
 For more information, see the [Patterns and pattern matching](~/_csharpstandard/standard/patterns.md) section of the [C# language specification](~/_csharpstandard/standard/README.md).
