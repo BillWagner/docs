@@ -20,7 +20,7 @@ When you expose a task from <xref:System.Threading.Tasks.TaskCompletionSource%60
 
 ## Complete every code path
 
-Always complete the task in success and failure paths. Use a `finally` block for cleanup logic that must always run. Here's the correct approach:
+Always complete the task in success and failure paths. Use a `catch` block for cleanup logic when the task fails. Use a `finally` block for cleanup logic that must always run. The following code block shows adding cleanup for a failure path:
 
 :::code language="csharp" source="./snippets/complete-your-tasks/csharp/Program.cs" id="MissingSetExceptionFix":::
 :::code language="vb" source="./snippets/complete-your-tasks/vb/Program.vb" id="MissingSetExceptionFix":::

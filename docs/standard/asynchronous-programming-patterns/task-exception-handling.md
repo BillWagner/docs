@@ -32,7 +32,7 @@ When you must block on a task, use <xref:System.Threading.Tasks.Task.GetAwaiter%
 :::code language="csharp" source="./snippets/task-exception-handling/csharp/Program.cs" id="SingleExceptionBad":::
 :::code language="vb" source="./snippets/task-exception-handling/vb/Program.vb" id="SingleExceptionBad":::
 
-For tasks that fault with multiple exceptions, `GetAwaiter().GetResult()` still throws one exception, but <xref:System.Threading.Tasks.Task.Exception%2A> stores an <xref:System.AggregateException> that contains all inner exceptions:
+For tasks that fault with multiple exceptions, `GetAwaiter().GetResult()` still throws one exception, but <xref:System.Threading.Tasks.Task.Exception?displayProperty=nameWithType> stores an <xref:System.AggregateException> that contains all inner exceptions:
 
 :::code language="csharp" source="./snippets/task-exception-handling/csharp/Program.cs" id="MultiException":::
 :::code language="vb" source="./snippets/task-exception-handling/vb/Program.vb" id="MultiException":::

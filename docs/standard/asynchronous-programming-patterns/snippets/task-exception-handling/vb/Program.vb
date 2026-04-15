@@ -71,7 +71,7 @@ Public Module UnobservedTaskExceptionExample
                 args.SetObserved()
             End Sub
 
-        Dim ignored = Task.Run(Sub() Throw New ApplicationException("Background failure"))
+        Task.Run(Sub() Throw New ApplicationException("Background failure"))
 
         GC.Collect()
         GC.WaitForPendingFinalizers()
