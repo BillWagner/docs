@@ -67,8 +67,15 @@ public static class MultiExceptionExample
             Console.WriteLine($"GetAwaiter().GetResult() surfaced: {ex.Message}");
         }
 
-        AggregateException allErrors = combined.Exception!.Flatten();
-        Console.WriteLine($"Task.Exception contains {allErrors.InnerExceptions.Count} exceptions.");
+        if (combined.IsFaulted && combined.Exception is not null)
+        {
+            AggregateException allErrors = combined.Exception.Flatten();
+            Console.WriteLine($"Task.Exception contains {allErrors.InnerExceptions.Count} exceptions.");
+        }
+        else
+        {
+            Console.WriteLine("Task.Exception is null because the task didn't fault.");
+        }
     }
 }
 // </MultiException>

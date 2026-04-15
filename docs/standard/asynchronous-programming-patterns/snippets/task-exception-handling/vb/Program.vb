@@ -49,8 +49,12 @@ Public Module MultiExceptionExample
             Console.WriteLine($"GetAwaiter().GetResult() surfaced: {ex.Message}")
         End Try
 
-        Dim allErrors As AggregateException = combined.Exception.Flatten()
-        Console.WriteLine($"Task.Exception contains {allErrors.InnerExceptions.Count} exceptions.")
+        If combined.IsFaulted AndAlso combined.Exception IsNot Nothing Then
+            Dim allErrors As AggregateException = combined.Exception.Flatten()
+            Console.WriteLine($"Task.Exception contains {allErrors.InnerExceptions.Count} exceptions.")
+        Else
+            Console.WriteLine("Task.Exception was not available because the task did not fault.")
+        End If
     End Sub
 End Module
 ' </MultiException>
