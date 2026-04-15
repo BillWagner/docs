@@ -34,6 +34,8 @@ items:
         href: ../../standard/asynchronous-programming-patterns/common-async-bugs.md
       - name: Async lambda pitfalls
         href: ../../standard/asynchronous-programming-patterns/async-lambda-pitfalls.md
+      - name: Keeping async methods alive
+        href: ../../standard/asynchronous-programming-patterns/keeping-async-methods-alive.md
   - name: Event-based asynchronous pattern (EAP)
     items:
     - name: Documentation overview
