@@ -1,6 +1,7 @@
 Imports System.Threading
 
 ' <MissingSetExceptionBug>
+' ⚠️ DON'T copy this snippet. It demonstrates a problem that causes hangs.
 Public NotInheritable Class MissingSetExceptionBug
     Public Function StartAsync(fail As Boolean) As Task(Of String)
         Dim tcs = New TaskCompletionSource(Of String)(TaskCreationOptions.RunContinuationsAsynchronously)
@@ -56,6 +57,7 @@ End Module
 ' </TrySetRace>
 
 ' <ResetBug>
+' ⚠️ DON'T copy this snippet. It demonstrates a problem where old waiters never complete.
 Public NotInheritable Class ResetBug
     Private _signal As TaskCompletionSource(Of Boolean) = NewSignal()
 

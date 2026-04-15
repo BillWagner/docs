@@ -18,19 +18,21 @@ helpviewer_keywords:
 
 Use `await` as your default. `await` gives you natural exception flow, keeps your code readable, and avoids sync-over-async deadlocks.
 
-Sometimes you still need to block on a `Task`, for example, in legacy synchronous entry points. In those cases, you need to understand how each API surfaces exceptions.
+Sometimes you still need to block on a <xref:System.Threading.Tasks.Task>, for example, in legacy synchronous entry points. In those cases, you need to understand how each API surfaces exceptions.
 
 ## Compare exception propagation for blocking APIs
 
-When a faulted task throws through blocking APIs, the exception type depends on the API:
-
-- `Task.Result` and `Task.Wait()` throw <xref:System.AggregateException>.
-- `task.GetAwaiter().GetResult()` throws the original exception type.
+When you must block on a task, use <xref:System.Threading.Tasks.Task.GetAwaiter%2A>().GetResult() to preserve the original exception type:
 
 :::code language="csharp" source="./snippets/task-exception-handling/csharp/Program.cs" id="SingleException":::
 :::code language="vb" source="./snippets/task-exception-handling/vb/Program.vb" id="SingleException":::
 
-For tasks that fault with multiple exceptions, `GetAwaiter().GetResult()` still throws one exception, but <xref:System.Threading.Tasks.Task.Exception?displayProperty=nameWithType> stores an <xref:System.AggregateException> that contains all inner exceptions.
+**Don't do this:** <xref:System.Threading.Tasks.Task.Result%2A> and <xref:System.Threading.Tasks.Task.Wait%2A> wrap exceptions in <xref:System.AggregateException>, which complicates exception handling. The following code uses these APIs and receives the wrong exception type:
+
+:::code language="csharp" source="./snippets/task-exception-handling/csharp/Program.cs" id="SingleExceptionBad":::
+:::code language="vb" source="./snippets/task-exception-handling/vb/Program.vb" id="SingleExceptionBad":::
+
+For tasks that fault with multiple exceptions, `GetAwaiter().GetResult()` still throws one exception, but <xref:System.Threading.Tasks.Task.Exception%2A> stores an <xref:System.AggregateException> that contains all inner exceptions:
 
 :::code language="csharp" source="./snippets/task-exception-handling/csharp/Program.cs" id="MultiException":::
 :::code language="vb" source="./snippets/task-exception-handling/vb/Program.vb" id="MultiException":::
@@ -43,11 +45,11 @@ Use this guidance when you choose between the two APIs:
 - If you must block and you want original exception types, use `GetAwaiter().GetResult()`.
 - If your existing code expects <xref:System.AggregateException>, use `Result` or `Wait()` and inspect `InnerExceptions`.
 
-These rules affect exception shape only. Both APIs still block the current thread, so both can deadlock on single-threaded <xref:System.Threading.SynchronizationContext> environments.
+These rules affect exception shape only. Both APIs still block the current thread, so both can deadlock on single-threaded <xref:System.Threading.SynchronizationContext> environments. To understand how to properly complete tasks on all code paths, see [Complete your tasks](complete-your-tasks.md).
 
 ## Unobserved task exceptions in modern .NET
 
-The runtime raises <xref:System.Threading.Tasks.TaskScheduler.UnobservedTaskException?displayProperty=nameWithType> when a faulted task gets finalized before code observes its exception.
+The runtime raises <xref:System.Threading.Tasks.TaskScheduler.UnobservedTaskException?displayProperty=nameWithType> when a faulted `Task` gets finalized before code observes its exception.
 
 In modern .NET, unobserved exceptions no longer crash the process by default. The runtime reports them through the event, and then continues execution.
 

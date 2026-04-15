@@ -1,6 +1,7 @@
 using System.Threading;
 
 // <MissingSetExceptionBug>
+// ⚠️ DON'T copy this snippet. It demonstrates a problem that causes hangs.
 public sealed class MissingSetExceptionBug
 {
     public Task<string> StartAsync(bool fail)
@@ -70,6 +71,7 @@ public static class TrySetRaceExample
 // </TrySetRace>
 
 // <ResetBug>
+// ⚠️ DON'T copy this snippet. It demonstrates a problem where old waiters never complete.
 public sealed class ResetBug
 {
     private TaskCompletionSource<bool> _signal = NewSignal();

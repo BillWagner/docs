@@ -10,15 +10,6 @@ public static class SingleExceptionExample
     {
         try
         {
-            _ = FaultAsync().Result;
-        }
-        catch (AggregateException ex)
-        {
-            Console.WriteLine($".Result threw {ex.GetType().Name} with inner {ex.InnerException?.GetType().Name}");
-        }
-
-        try
-        {
             _ = FaultAsync().GetAwaiter().GetResult();
         }
         catch (Exception ex)
@@ -28,6 +19,29 @@ public static class SingleExceptionExample
     }
 }
 // </SingleException>
+
+// <SingleExceptionBad>
+// ⚠️ DON'T copy this snippet. It demonstrates a problem where exceptions get wrapped unnecessarily.
+public static class SingleExceptionBadExample
+{
+    public static Task<int> FaultAsync()
+    {
+        return Task.FromException<int>(new InvalidOperationException("Single failure"));
+    }
+
+    public static void ShowBlockingDifferences()
+    {
+        try
+        {
+            _ = FaultAsync().Result;
+        }
+        catch (AggregateException ex)
+        {
+            Console.WriteLine($".Result threw {ex.GetType().Name} with inner {ex.InnerException?.GetType().Name}");
+        }
+    }
+}
+// </SingleExceptionBad>
 
 // <MultiException>
 public static class MultiExceptionExample
@@ -92,6 +106,9 @@ public static class Program
     {
         Console.WriteLine("--- SingleException ---");
         SingleExceptionExample.ShowBlockingDifferences();
+
+        Console.WriteLine("--- SingleExceptionBad ---");
+        SingleExceptionBadExample.ShowBlockingDifferences();
 
         Console.WriteLine("--- MultiException ---");
         MultiExceptionExample.ShowMultipleExceptions();

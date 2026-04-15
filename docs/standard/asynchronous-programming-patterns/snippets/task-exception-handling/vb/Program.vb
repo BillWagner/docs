@@ -6,12 +6,6 @@ Public Module SingleExceptionExample
 
     Public Sub ShowBlockingDifferences()
         Try
-            Dim ignored = FaultAsync().Result
-        Catch ex As AggregateException
-            Console.WriteLine($".Result threw {ex.GetType().Name} with inner {ex.InnerException?.GetType().Name}")
-        End Try
-
-        Try
             Dim ignored = FaultAsync().GetAwaiter().GetResult()
         Catch ex As Exception
             Console.WriteLine($"GetAwaiter().GetResult() threw {ex.GetType().Name}")
@@ -19,6 +13,23 @@ Public Module SingleExceptionExample
     End Sub
 End Module
 ' </SingleException>
+
+' <SingleExceptionBad>
+' ⚠️ DON'T copy this snippet. It demonstrates a problem where exceptions get wrapped unnecessarily.
+Public Module SingleExceptionBadExample
+    Public Function FaultAsync() As Task(Of Integer)
+        Return Task.FromException(Of Integer)(New InvalidOperationException("Single failure"))
+    End Function
+
+    Public Sub ShowBlockingDifferences()
+        Try
+            Dim ignored = FaultAsync().Result
+        Catch ex As AggregateException
+            Console.WriteLine($".Result threw {ex.GetType().Name} with inner {ex.InnerException?.GetType().Name}")
+        End Try
+    End Sub
+End Module
+' </SingleExceptionBad>
 
 ' <MultiException>
 Public Module MultiExceptionExample
@@ -75,6 +86,9 @@ Module Program
     Sub Main()
         Console.WriteLine("--- SingleException ---")
         SingleExceptionExample.ShowBlockingDifferences()
+
+        Console.WriteLine("--- SingleExceptionBad ---")
+        SingleExceptionBadExample.ShowBlockingDifferences()
 
         Console.WriteLine("--- MultiException ---")
         MultiExceptionExample.ShowMultipleExceptions()
