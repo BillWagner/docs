@@ -27,7 +27,7 @@ When you must block on a task, use <xref:System.Threading.Tasks.Task.GetAwaiter%
 :::code language="csharp" source="./snippets/task-exception-handling/csharp/Program.cs" id="SingleException":::
 :::code language="vb" source="./snippets/task-exception-handling/vb/Program.vb" id="SingleException":::
 
-**Don't do this:** <xref:System.Threading.Tasks.Task.Result%2A> and <xref:System.Threading.Tasks.Task.Wait%2A> wrap exceptions in <xref:System.AggregateException>, which complicates exception handling. The following code uses these APIs and receives the wrong exception type:
+<xref:System.Threading.Tasks.Task`1.Result?displayProperty=nameWithType> and <xref:System.Threading.Tasks.Task.Wait%2A> wrap exceptions in <xref:System.AggregateException>, which complicates exception handling. The following code uses these APIs and receives the wrong exception type:
 
 :::code language="csharp" source="./snippets/task-exception-handling/csharp/Program.cs" id="SingleExceptionBad":::
 :::code language="vb" source="./snippets/task-exception-handling/vb/Program.vb" id="SingleExceptionBad":::
